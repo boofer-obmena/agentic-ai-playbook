@@ -2,12 +2,12 @@
 id: PRINCIPLE-004
 title: "Executable Specifications Principle"
 title_ru: "Принцип неизменяемости фактов и вычисляемости проекций"
-type: "principle"
+type: principle
 subtype: "архитектурный принцип"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 
@@ -15,8 +15,10 @@ related: []
 
 > **Принцип неизменяемости фактов и вычисляемости проекций**
 
-**Essence:**
+> *[English translation pending. Original Russian text preserved in sections below.]*
+
+## Essence
 
 Принцип неизменяемости фактов и вычисляемости проекций: Сырые данные (факты) являются единственным источником истины и никогда не перезаписываются. Синтезированные артефакты — ТЗ, код, отчёты — являются временными вычисляемыми проекциями. Исправление всегда вносится в слой фактов; производные артефакты пересобираются автоматически.
 
-**Related Entities:**
+## Related Entities

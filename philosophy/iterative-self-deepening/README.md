@@ -2,12 +2,12 @@
 id: PHILOSOPHY-002
 title: "Iterative Self Deepening"
 title_ru: "Освобождение от административной рутины"
-type: "philosophy"
+type: philosophy
 subtype: "философский тезис"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 
@@ -15,8 +15,10 @@ related: []
 
 > **Освобождение от административной рутины**
 
-**Essence:**
+> *[English translation pending. Original Russian text preserved in sections below.]*
+
+## Essence
 
 Освобождение от административной рутины: Автоматизация нацелена на снятие с человека бремени стенографирования, формализации и рутинных согласований. Человеку остаётся стратегический контроль, экспертное суждение и эмпатия.
 
-**Related Entities:**
+## Related Entities

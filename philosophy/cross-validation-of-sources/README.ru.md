@@ -1,12 +1,12 @@
 ---
 id: PHILOSOPHY-006
 title: "Первичность итеративного самоуглубления над однопроходной генерацией"
-type: "philosophy"
+type: philosophy
 subtype: "философский тезис"
-status: "raw"
-source: "авторская разработка; Master All 20 Agentic AI Design Patterns (SOURCE-006)"
-version: "1.0"
+status: raw
+source: авторская разработка; Master All 20 Agentic AI Design Patterns (SOURCE-006)
 date_added: 2026-05-07
+version: 1.0
 related: []
 ---
 

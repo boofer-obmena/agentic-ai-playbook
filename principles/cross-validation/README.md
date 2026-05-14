@@ -2,12 +2,12 @@
 id: PRINCIPLE-005
 title: "Cross Validation"
 title_ru: "Принцип явного потока состояния"
-type: "principle"
+type: principle
 subtype: "архитектурный принцип"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 
@@ -15,8 +15,10 @@ related: []
 
 > **Принцип явного потока состояния**
 
-**Essence:**
+> *[English translation pending. Original Russian text preserved in sections below.]*
+
+## Essence
 
 Принцип явного потока состояния: Все взаимодействия агентов в рамках одной задачи управляются централизованным оркестратором с явной передачей неизменяемых версий данных. Хаотичная событийная хореография исключена из критических процессов.
 
-**Related Entities:**
+## Related Entities

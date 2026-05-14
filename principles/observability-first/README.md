@@ -2,12 +2,12 @@
 id: PRINCIPLE-009
 title: "Observability First"
 title_ru: "Качество входа определяет качество выхода"
-type: "principle"
+type: principle
 subtype: "архитектурный принцип"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 
@@ -15,8 +15,10 @@ related: []
 
 > **Качество входа определяет качество выхода**
 
-**Essence:**
+> *[English translation pending. Original Russian text preserved in sections below.]*
+
+## Essence
 
 Принцип 4. Качество входа определяет качество выхода: Агент, работающий с базой знаний, не галлюцинирует — он отражает информационную диету своей KB. Ответственность за качество KB лежит на архитекторе, не на модели. При наполнении базы знаний важно обеспечивать качественную индексацию и кураторский отбор источников.
 
-**Related Entities:**
+## Related Entities

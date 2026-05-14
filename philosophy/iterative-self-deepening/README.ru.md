@@ -1,12 +1,12 @@
 ---
 id: PHILOSOPHY-002
 title: "Освобождение от административной рутины"
-type: "philosophy"
+type: philosophy
 subtype: "философский тезис"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 

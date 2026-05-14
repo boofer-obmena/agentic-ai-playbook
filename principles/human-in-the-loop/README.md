@@ -2,12 +2,12 @@
 id: PRINCIPLE-010
 title: "Human In The Loop"
 title_ru: "Журнал аудита как основа доверия"
-type: "principle"
+type: principle
 subtype: "архитектурный принцип"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 
@@ -15,8 +15,10 @@ related: []
 
 > **Журнал аудита как основа доверия**
 
-**Essence:**
+> *[English translation pending. Original Russian text preserved in sections below.]*
+
+## Essence
 
 Принцип 5. Журнал аудита как основа доверия: Автономный агент в производственной среде принимается stakeholders только если каждый его шаг объяснимо восстанавливаем. Полный журнал аудита (Trace History) — не инструмент отладки, а инструмент доверия. Агент без аудита — это чёрный ящик, которому нельзя доверять.
 
-**Related Entities:**
+## Related Entities

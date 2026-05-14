@@ -1,12 +1,12 @@
 ---
 id: PRINCIPLE-010
 title: "Журнал аудита как основа доверия"
-type: "principle"
+type: principle
 subtype: "архитектурный принцип"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 

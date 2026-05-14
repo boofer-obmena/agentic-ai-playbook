@@ -2,12 +2,12 @@
 id: PHILOSOPHY-004
 title: "Semantic Contract Versioning"
 title_ru: "Принцип пропускной способности над ёмкостью"
-type: "philosophy"
+type: philosophy
 subtype: "философский тезис"
-status: "raw"
-source: "авторская разработка"
-version: "1.0-preview"
+status: raw
+source: авторская разработка
 date_added: 2026-05-07
+version: 1.0-preview
 related: []
 ---
 
@@ -15,8 +15,10 @@ related: []
 
 > **Принцип пропускной способности над ёмкостью**
 
-**Essence:**
+> *[English translation pending. Original Russian text preserved in sections below.]*
+
+## Essence
 
 Принцип пропускной способности над ёмкостью: При проектировании любого слоя системы критическим параметром является не объём хранимых данных, а скорость их извлечения и передачи. Предпочтительнее короткий точный чанк, извлекаемый быстро, чем длинный исчерпывающий, требующий медленного разбора.
 
-**Related Entities:**
+## Related Entities
