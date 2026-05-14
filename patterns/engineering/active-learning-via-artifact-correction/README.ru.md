@@ -1,6 +1,6 @@
 ---
 id: PATTERN-030
-title: "Паттерн И1. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)"
+title: "Паттерн 30. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)"
 type: pattern
 subtype: engineering
 status: raw
@@ -10,7 +10,9 @@ version: 1.0-preview
 related: []
 ---
 
-# Паттерн И1. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)
+# Паттерн 30. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)
+
+[Read in English](README.md)
 
 **Проблема:** Статичные промпты не адаптируются к специфике конкретной организации, стилю её документов и предпочтениям конкретных пользователей. Система, корректно работающая «в среднем», может систематически производить результаты, требующие ручной доводки в конкретном контексте.
 

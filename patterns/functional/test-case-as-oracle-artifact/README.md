@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 7. «Тест-кейс как артефакт со встроенным оракулом» (Test Case as Oracle Artifact)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

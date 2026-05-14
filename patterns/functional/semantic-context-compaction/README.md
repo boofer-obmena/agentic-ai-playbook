@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 27. «Семантически умное сжатие контекста» (Semantic Context Compaction)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

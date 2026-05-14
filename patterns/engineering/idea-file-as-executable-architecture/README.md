@@ -1,7 +1,7 @@
 ---
 id: PATTERN-042
 title: "Idea File As Executable Architecture"
-title_ru: "Паттерн И13. «Файл идеи как исполнимый архитектурный артефакт» (Idea File as Executable Architecture)"
+title_ru: "Паттерн 42. «Файл идеи как исполнимый архитектурный артефакт» (Idea File as Executable Architecture)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Idea File As Executable Architecture
 
-> **Паттерн И13. «Файл идеи как исполнимый архитектурный артефакт» (Idea File as Executable Architecture)**
+> **Паттерн 42. «Файл идеи как исполнимый архитектурный артефакт» (Idea File as Executable Architecture)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

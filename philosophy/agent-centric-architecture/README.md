@@ -15,7 +15,9 @@ related: []
 
 > **Принцип честной неуверенности (Honest Uncertainty)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Essence
 

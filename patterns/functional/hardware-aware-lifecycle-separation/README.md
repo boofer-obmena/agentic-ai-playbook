@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 19. «Аппаратно-осознанное разделение фаз жизненного цикла модели» (Hardware-Aware Lifecycle Separation)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -1,7 +1,7 @@
 ---
 id: PATTERN-051
 title: "Agent Quality Gate Pipeline"
-title_ru: "Паттерн И14. «Контроль качества в жизненном цикле агента» (Agent Quality Gate Pipeline)"
+title_ru: "Паттерн 51. «Контроль качества в жизненном цикле агента» (Agent Quality Gate Pipeline)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Agent Quality Gate Pipeline
 
-> **Паттерн И14. «Контроль качества в жизненном цикле агента» (Agent Quality Gate Pipeline)**
+> **Паттерн 51. «Контроль качества в жизненном цикле агента» (Agent Quality Gate Pipeline)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -1,7 +1,7 @@
 ---
 id: PATTERN-041
 title: "Adaptive Load Management"
-title_ru: "Паттерн И12. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)"
+title_ru: "Паттерн 41. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Adaptive Load Management
 
-> **Паттерн И12. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)**
+> **Паттерн 41. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

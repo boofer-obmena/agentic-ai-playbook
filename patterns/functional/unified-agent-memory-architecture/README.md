@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 45. «Единая модель памяти агента: четыре когнитивных уровня» (Unified Agent Memory Architecture)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -1,7 +1,7 @@
 ---
 id: PATTERN-038
 title: "Gradient Data Storage"
-title_ru: "Паттерн И9. «Градиентное хранение данных» (Gradient Data Storage)"
+title_ru: "Паттерн 38. «Градиентное хранение данных» (Gradient Data Storage)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Gradient Data Storage
 
-> **Паттерн И9. «Градиентное хранение данных» (Gradient Data Storage)**
+> **Паттерн 38. «Градиентное хранение данных» (Gradient Data Storage)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

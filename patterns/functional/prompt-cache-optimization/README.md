@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 28. «Статика вперёд, динамика в конец» (Prompt Cache Optimization)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

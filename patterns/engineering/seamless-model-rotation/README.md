@@ -1,7 +1,7 @@
 ---
 id: PATTERN-031
 title: "Seamless Model Rotation"
-title_ru: "Паттерн И2. «Непрерывная ротация моделей без остановки конвейера» (Seamless Model Rotation in Vector Store)"
+title_ru: "Паттерн 31. «Непрерывная ротация моделей без остановки конвейера» (Seamless Model Rotation)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Seamless Model Rotation
 
-> **Паттерн И2. «Непрерывная ротация моделей без остановки конвейера» (Seamless Model Rotation in Vector Store)**
+> **Паттерн 31. «Непрерывная ротация моделей без остановки конвейера» (Seamless Model Rotation)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

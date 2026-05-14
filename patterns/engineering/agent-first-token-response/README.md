@@ -1,7 +1,7 @@
 ---
 id: PATTERN-034
 title: "Agent First Token Response"
-title_ru: "Паттерн И5. «Первый отклик агента» (Agent First-Token Response)"
+title_ru: "Паттерн 34. «Первый отклик агента» (Agent First-Token Response)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Agent First Token Response
 
-> **Паттерн И5. «Первый отклик агента» (Agent First-Token Response)**
+> **Паттерн 34. «Первый отклик агента» (Agent First-Token Response)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

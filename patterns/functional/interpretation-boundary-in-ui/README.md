@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 16. «Граница интерпретации в интерфейсе» (Interpretation Boundary in UI)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 8. «Фундаментальный источник против вычисляемой проекции» (Ground Truth vs. Computed Projection)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 17. «Динамическая онтология с заслуженной структурой» (Earned Structure Dynamic Ontology)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

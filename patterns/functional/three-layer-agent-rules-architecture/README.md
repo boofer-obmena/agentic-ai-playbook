@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 25. «Трёхуровневая архитектура правил агента» (Three-Layer Agent Rules Architecture)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

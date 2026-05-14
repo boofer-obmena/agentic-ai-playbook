@@ -1,7 +1,7 @@
 ---
 id: PATTERN-033
 title: "Semantic Query Fan Out"
-title_ru: "Паттерн И4. «Семантический веер запросов» (Semantic Query Fan-out)"
+title_ru: "Паттерн 33. «Семантический веер запросов» (Semantic Query Fan-out)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Semantic Query Fan Out
 
-> **Паттерн И4. «Семантический веер запросов» (Semantic Query Fan-out)**
+> **Паттерн 33. «Семантический веер запросов» (Semantic Query Fan-out)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

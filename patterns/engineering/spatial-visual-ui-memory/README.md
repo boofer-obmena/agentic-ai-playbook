@@ -1,7 +1,7 @@
 ---
 id: PATTERN-040
 title: "Spatial Visual Ui Memory"
-title_ru: "Паттерн И11. «Пространственно-визуальная память интерфейсов» (Spatial-Visual UI Memory)"
+title_ru: "Паттерн 40. «Пространственно-визуальная память интерфейсов» (Spatial-Visual UI Memory)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Spatial Visual Ui Memory
 
-> **Паттерн И11. «Пространственно-визуальная память интерфейсов» (Spatial-Visual UI Memory)**
+> **Паттерн 40. «Пространственно-визуальная память интерфейсов» (Spatial-Visual UI Memory)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

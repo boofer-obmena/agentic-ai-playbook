@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 49. «Кросс-доменное заимствование мышления» (Cross-Domain Cognitive Borrowing)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

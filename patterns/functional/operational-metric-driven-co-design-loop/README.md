@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 15. «Сквозной цикл улучшения на основе операционных метрик» (Operational Metric-Driven Co-Design Loop)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

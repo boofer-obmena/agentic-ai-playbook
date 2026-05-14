@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 43. «Рефлексивное самоуглубление в рамках одной роли» (Single-Role Reflective Deepening)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -1,7 +1,7 @@
 ---
 id: PATTERN-035
 title: "Dev Prod Environment Parity"
-title_ru: "Паттерн И6. «Паритет сред разработки и продакшн» (Dev-Prod Environment Parity)"
+title_ru: "Паттерн 35. «Паритет сред разработки и продакшн» (Dev-Prod Environment Parity)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Dev Prod Environment Parity
 
-> **Паттерн И6. «Паритет сред разработки и продакшн» (Dev-Prod Environment Parity)**
+> **Паттерн 35. «Паритет сред разработки и продакшн» (Dev-Prod Environment Parity)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

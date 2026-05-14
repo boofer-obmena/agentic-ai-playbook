@@ -1,6 +1,6 @@
 ---
 id: PATTERN-041
-title: "Паттерн И12. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)"
+title: "Паттерн 41. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)"
 type: pattern
 subtype: engineering
 status: raw
@@ -10,7 +10,9 @@ version: 1.0-preview
 related: []
 ---
 
-# Паттерн И12. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)
+# Паттерн 41. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)
+
+[Read in English](README.md)
 
 **Проблема:** При перегрузке внешней системы или модели агент продолжает отправлять запросы, усугубляя ситуацию. Повторные попытки при недоступном сервисе приводят к каскадному отказу: очередь запросов растёт, ресурсы истощаются, система не восстанавливается.
 

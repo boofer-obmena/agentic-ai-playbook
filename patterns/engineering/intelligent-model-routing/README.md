@@ -1,7 +1,7 @@
 ---
 id: PATTERN-036
 title: "Intelligent Model Routing"
-title_ru: "Паттерн И7. «Интеллектуальная маршрутизация с самооценкой сложности» (Intelligent Model Routing)"
+title_ru: "Паттерн 36. «Интеллектуальная маршрутизация с самооценкой сложности» (Intelligent Model Routing)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Intelligent Model Routing
 
-> **Паттерн И7. «Интеллектуальная маршрутизация с самооценкой сложности» (Intelligent Model Routing)**
+> **Паттерн 36. «Интеллектуальная маршрутизация с самооценкой сложности» (Intelligent Model Routing)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

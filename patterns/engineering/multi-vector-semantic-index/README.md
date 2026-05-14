@@ -1,7 +1,7 @@
 ---
 id: PATTERN-037
 title: "Multi Vector Semantic Index"
-title_ru: "Паттерн И8. «Мультивекторный семантический индекс» (Multi-Vector Semantic Index)"
+title_ru: "Паттерн 37. «Мультивекторный семантический индекс» (Multi-Vector Semantic Index)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Multi Vector Semantic Index
 
-> **Паттерн И8. «Мультивекторный семантический индекс» (Multi-Vector Semantic Index)**
+> **Паттерн 37. «Мультивекторный семантический индекс» (Multi-Vector Semantic Index)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

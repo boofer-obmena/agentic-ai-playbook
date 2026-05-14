@@ -1,7 +1,7 @@
 ---
 id: PATTERN-030
 title: "Active Learning Via Artifact Correction"
-title_ru: "Паттерн И1. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)"
+title_ru: "Паттерн 30. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Active Learning Via Artifact Correction
 
-> **Паттерн И1. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)**
+> **Паттерн 30. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

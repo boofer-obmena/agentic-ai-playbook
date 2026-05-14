@@ -15,7 +15,9 @@ related: []
 
 > **Паттерн 29. «Журнал сессии в режиме только-добавления» (Append-Only Session Log)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

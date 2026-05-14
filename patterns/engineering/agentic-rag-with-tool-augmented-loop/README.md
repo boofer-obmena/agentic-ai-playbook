@@ -1,7 +1,7 @@
 ---
 id: PATTERN-032
 title: "Agentic Rag With Tool Augmented Loop"
-title_ru: "Паттерн И3. «Агентный поиск с инструментальным замкнутым циклом» (Agentic RAG with Tool-Augmented Closed Loop)"
+title_ru: "Паттерн 32. «Агентный поиск с инструментальным замкнутым циклом» (Agentic RAG with Tool-Augmented Closed Loop)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Agentic Rag With Tool Augmented Loop
 
-> **Паттерн И3. «Агентный поиск с инструментальным замкнутым циклом» (Agentic RAG with Tool-Augmented Closed Loop)**
+> **Паттерн 32. «Агентный поиск с инструментальным замкнутым циклом» (Agentic RAG with Tool-Augmented Closed Loop)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 

@@ -1,7 +1,7 @@
 ---
 id: PATTERN-039
 title: "Generator Executor Pattern"
-title_ru: "Паттерн И10. «Генератор-Исполнитель» (Generator-Executor Pattern)"
+title_ru: "Паттерн 39. «Генератор-Исполнитель» (Generator-Executor Pattern)"
 type: pattern
 subtype: engineering
 status: raw
@@ -13,9 +13,11 @@ related: []
 
 # Generator Executor Pattern
 
-> **Паттерн И10. «Генератор-Исполнитель» (Generator-Executor Pattern)**
+> **Паттерн 39. «Генератор-Исполнитель» (Generator-Executor Pattern)**
 
-> *[English translation pending. Original Russian text preserved in sections below.]*
+> *[English translation pending — original Russian text preserved in sections below.]*
+
+[Читать на русском](README.ru.md)
 
 ## Problem
 
