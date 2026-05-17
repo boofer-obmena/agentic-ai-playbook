@@ -5,9 +5,9 @@ title_ru: "Паттерн 28. «Статика вперёд, динамика в
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
@@ -15,28 +15,10 @@ related: []
 
 > **Паттерн 28. «Статика вперёд, динамика в конец» (Prompt Cache Optimization)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Every language model call is billed by the number of input tokens. An agent in a loop makes dozens of iterations, each time sending the system prompt. If the prompt begins with dynamically changing content (current time, a variable's status), the cache is invalidated on every iteration. On long tasks, this turns the agent into a financial black hole.
 
-[Читать на русском](README.ru.md)
+**Solution:** The system prompt is assembled according to a strict principle: static content — always first, dynamic content — always at the end. Static content: agent role, categorical rules, tool descriptions, configuration file contents — everything that does not change between iterations. Dynamic content: current working directory, system time, current task status, last tool call result. Providers use prefix caching: if the beginning of the prompt matches the previous call, those tokens are served from the cache without recomputation.
 
-## Problem
+**Experimental Verification:** Required. Configure cache_hit / cache_miss logging on the provider side. Run the agent in two configurations: static-first and dynamic-first. Measure the cache_hit proportion and the actual cost of a run. Expected result: the correct configuration yields 70–90% cache_hit on static tokens.
 
-Каждый вызов языковой модели тарифицируется по числу входных токенов. Агент в цикле делает десятки итераций, каждый раз отправляя системный промпт. Если промпт начинается с динамически изменяющегося контента (текущее время, статус переменной), кэш сбрасывается при каждой итерации. На длинных задачах это превращает агента в финансовую чёрную дыру.
-
-## Solution
-
-Системный промпт собирается по строгому принципу: статичный контент — всегда первым, динамический контент — всегда в конце. Статичный контент: роль агента, категорические правила, описания инструментов, содержимое файлов конфигурации — всё, что не меняется между итерациями. Динамический контент: текущая рабочая директория, системное время, статус текущей задачи, результат последнего вызова инструмента. Провайдеры используют кэширование префиксов: если начало промпта совпадает с предыдущим вызовом, токены берутся из кэша без пересчёта.
-
-## Experimental Verification
-
-Настроить логирование cache_hit / cache_miss на стороне провайдера. Запустить агента в двух конфигурациях: статика первой и динамика первой. Измерить процент cache_hit и фактическую стоимость прогона. Ожидаемый результат: правильная конфигурация даёт 70–90% cache_hit на статичных токенах.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

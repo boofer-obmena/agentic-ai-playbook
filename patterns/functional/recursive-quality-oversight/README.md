@@ -5,42 +5,21 @@ title_ru: "Паттерн 2. «Активная прослеживаемость
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Recursive Quality Oversight
 
 > **Паттерн 2. «Активная прослеживаемость: Агент-Аудитор» (Recursive Quality Oversight)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Passive auditing — storing logs and recording errors — does not prevent problems; it merely documents what has already happened. By the time an error is discovered, it has already propagated through several pipeline stages and produced a cascade of defective artifacts. A mechanism is needed that actively searches for root causes rather than merely logging symptoms.
 
-[Читать на русском](README.ru.md)
+**Solution:** A specialized meta-agent — the Auditor — is introduced, which observes the pipeline's operation "from the outside." The Auditor periodically analyzes interaction logs, identifies root causes of errors (not just their symptoms), and surfaces improvement recommendations for the Architect. Key extensions: (1) the Auditor is equipped with data drift detection capability; (2) the Auditor compares computed projections with ground-truth facts, detecting the "smooth wall effect" — when explicit contradictions disappear in the final text instead of being explicitly flagged.
 
-## Problem
+**Example:** When analyzing a series of similar defects in finished code, the Auditor discovers that the root cause is not in the developer's work but in systematic ambiguity at the functional requirements stage: the template is missing a mandatory "Data Type" field. The Auditor proposes that the Architect add this field to the FR template and update the Few-Shot examples for the analyst agent.
 
-Пассивный аудит (хранение логов и запись ошибок) не предотвращает проблемы — он лишь документирует уже произошедшее. К тому моменту, когда ошибка обнаруживается, она успевает распространиться через несколько этапов конвейера и порождает каскад дефектных артефактов. Необходим механизм, который активно ищет первопричины, а не просто регистрирует симптомы.
+**Experimental Verification:** Deliberately introduce ambiguity into one of the requirements at the User Story stage. Trace how this ambiguity transforms through the FR and TS. Verify: whether the Auditor identifies the specific stage where the distortion occurred and formulates a concrete proposal for fixing the template.
 
-## Solution
-
-Вводится специализированный мета-агент — Аудитор, который наблюдает за работой конвейера «со стороны». Аудитор периодически анализирует логи взаимодействий, выявляет первопричины ошибок (а не только их симптомы) и формулирует предложения по улучшению для Архитектора. Ключевые расширения: (1) Аудитор получает функцию детектора дрейфа данных. (2) Аудитор сравнивает вычисляемые проекции с сырыми фактами, обнаруживая «эффект гладкой стены» — когда явные противоречия исчезают в финальном тексте вместо того, чтобы быть явно обозначены.
-
-## Example
-
-При анализе серии однотипных дефектов в готовом коде Аудитор обнаруживает, что первопричина — не в работе разработчика, а в систематической неоднозначности на этапе ФТ: в шаблоне отсутствует обязательное поле «Тип данных». Аудитор предлагает Архитектору добавить это поле в шаблон ФТ и обновить Few-Shot примеры для агента-аналитика.
-
-## Experimental Verification
-
-Намеренно внести неоднозначность в одно из требований на этапе User Story. Проследить, как эта неоднозначность трансформируется через ФТ и ТЗ. Проверить: укажет ли Аудитор на конкретный этап, где произошло искажение, и сформулирует ли конкретное предложение по исправлению шаблона.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

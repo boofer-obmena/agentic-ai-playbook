@@ -1,38 +1,23 @@
 ---
 id: PATTERN-019
-title: "Hardware Aware Lifecycle Separation"
+title: "Hardware-Aware Lifecycle Separation"
 title_ru: "Паттерн 19. «Аппаратно-осознанное разделение фаз жизненного цикла модели» (Hardware-Aware Lifecycle Separation)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
-# Hardware Aware Lifecycle Separation
+# Hardware-Aware Lifecycle Separation
 
 > **Паттерн 19. «Аппаратно-осознанное разделение фаз жизненного цикла модели» (Hardware-Aware Lifecycle Separation)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Model fine-tuning tasks and continuous inference tasks differ fundamentally in their workload profile. When these workloads are mixed on the same resources, both suffer: inference degrades due to GPU contention, fine-tuning gets interrupted.
 
-[Читать на русском](README.ru.md)
+**Solution:** Compute resources are explicitly divided into two pools. Train Pool: launched on a schedule during low-load periods. Inference Pool: reserved for serving pipeline requests in real time. Inference priority is inviolable: when SLA breach is imminent, the Orchestrator automatically throttles training tasks.
 
-## Problem
+**Experimental Verification:** Required. Simulate concurrent training and inference loads. Verify that when inference demand spikes, training tasks are throttled and inference SLA is maintained. Verify that training resumes automatically when inference load returns to baseline.
 
-Задачи дообучения модели и задачи непрерывного инференса принципиально различаются по характеру нагрузки. При смешении этих нагрузок на одних и тех же ресурсах обе страдают: инференс деградирует из-за конкуренции за GPU, файнтюнинг прерывается.
-
-## Solution
-
-Вычислительные ресурсы явно разделяются на два пула. Train Pool (Пул обучения): запускается по расписанию в периоды минимальной нагрузки. Inference Pool (Пул инференса): зарезервирован для обслуживания запросов конвейера в реальном времени. Приоритет инференса неприкосновенен: при угрозе нарушения SLA Оркестратор автоматически ограничивает задачи обучения (throttling).
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

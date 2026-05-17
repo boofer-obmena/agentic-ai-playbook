@@ -1,26 +1,17 @@
 ---
 id: PHILOSOPHY-001
-title: "Domain Primacy"
+title: "Domain Primacy (DDD)"
 title_ru: "Первичность предметной области (DDD)"
 type: philosophy
-subtype: "философский тезис"
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
-# Domain Primacy
+# Domain Primacy (DDD)
 
 > **Первичность предметной области (DDD)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
-
-[Читать на русском](README.ru.md)
-
-## Essence
-
-Первичность предметной области (DDD): Архитектура агентов выводится из реальных коммуникаций и процессов организации, а не навязывается сверху технологическими ограничениями.
-
-## Related Entities
+Agent architecture is derived from the organization's actual communications and processes, not imposed top-down by technological constraints.

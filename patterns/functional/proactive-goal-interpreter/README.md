@@ -5,48 +5,27 @@ title_ru: "Паттерн 22. «Проактивный интерпретато�
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Proactive Goal Interpreter
 
 > **Паттерн 22. «Проактивный интерпретатор цели» (Proactive Goal Interpreter)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A reactive agent waits for explicit commands. In a dynamic environment — when new data appears, deadlines expire, or external conditions change — an agent without a proactive monitoring mechanism misses critical events and loses opportunities for timely intervention.
 
-[Читать на русском](README.ru.md)
+**Solution:** The agent receives not only the current task but also a high-level goal and criteria for its attainment. Based on these criteria, the agent independently monitors incoming data streams (new messages, file changes, system metrics) and proactively initiates actions when relevant events are detected — without waiting for an explicit command. Key point: the agent does not merely respond to a request; it interprets context and anticipates the next step.
 
-## Problem
+**Example:** An agent receives the goal: "Ensure uninterrupted server operation." Criterion: "Free disk space must not drop below 20%." The agent monitors disk space every 15 minutes. When it reaches 25%, it proactively initiates a log cleanup task without waiting for a user command.
 
-Реактивный агент ждёт явных команд. В динамичной среде — когда появляются новые данные, истекают дедлайны или изменяются внешние условия — агент, не имеющий механизма проактивного мониторинга, пропускает важные события и упускает возможности для своевременного вмешательства.
+### Extension: Agent in a Shared Communication Channel
 
-## Solution
+An agent's proactivity can be directed not only at external sources (RSS, email, APIs) but also at the team's internal environment. An agent present in a shared channel (chat, messenger) continuously listens to discussions and semantically filters noise from structural knowledge.
 
-Агент получает не только текущую задачу, но и высокоуровневую цель и критерии её достижения. На основе этих критериев агент самостоятельно мониторит входящие потоки данных (новые сообщения, изменения в файлах, метрики систем) и проактивно инициирует действия при обнаружении релевантных событий — без ожидания явной команды. Ключевое: агент не просто реагирует на запрос, а интерпретирует контекст и предугадывает следующий шаг.
+Filtering mechanics: the agent tracks not individual messages but completed discussion threads and their final outcomes. Example: a thread of 50 messages ending with the approval of a new template → saved to the knowledge core. A discussion about the lunch menu at a corporate event → ignored. The agent's quality and accuracy grow with each day spent in the team. Warning: control is needed over what enters the "knowledge core" — an incorrect decision made in jest must not become a rule.
 
-## Example
+**Experimental Verification:** Configure an agent with two triggers: one based on an explicit command, the other on a metric threshold. Verify that the agent initiates action autonomously when the threshold is reached, without waiting for a command. Measure: time between the event and the agent's response vs. time for a human to detect the same situation manually.
 
-Агент получает цель: «Обеспечить бесперебойную работу сервера». Критерий: «Свободное место на диске не должно опускаться ниже 20%.» Агент мониторит дисковое пространство каждые 15 минут. При достижении 25% — проактивно инициирует задачу очистки логов, не ожидая команды от пользователя.
-
-#### **Расширение. Агент в общем канале коммуникации**
-
-Проактивность агента может быть направлена не только на внешние источники (RSS, почта, API), но и на внутреннюю среду команды. Агент, находящийся в общем канале (чат, мессенджер), непрерывно слушает обсуждения и семантически фильтрует шум от структурных знаний.
-
-Механика фильтрации: агент отслеживает не отдельные сообщения, а завершённые ветки обсуждений и их финальные результаты. Пример: ветка из 50 реплик, завершившаяся утверждением нового шаблона → сохраняется в ядро знаний. Обсуждение меню на корпоратив → игнорируется. Качество и точность агента растут с каждым днём пребывания в команде. Предупреждение: необходим контроль за тем, что именно попадает в «ядро знаний» — некорректное решение, принятое в шутку, не должно стать правилом.
-
-## Experimental Verification
-
-Настроить агента с двумя триггерами: один — по явной команде, другой — по пороговому значению метрики. Убедиться, что агент инициирует действие самостоятельно при достижении порога, не дожидаясь команды. Измерить: время между событием и реакцией агента vs. время ручного обнаружения той же ситуации человеком.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

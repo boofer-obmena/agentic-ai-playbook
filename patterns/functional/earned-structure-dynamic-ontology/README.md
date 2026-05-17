@@ -5,34 +5,19 @@ title_ru: "Паттерн 17. «Динамическая онтология с �
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Earned Structure Dynamic Ontology
 
 > **Паттерн 17. «Динамическая онтология с заслуженной структурой» (Earned Structure Dynamic Ontology)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Rigid, pre-defined ontologies cannot capture new relationships that emerge as the system operates. A mechanism is needed that organically surfaces new relationships without dismantling the verified structure.
 
-[Читать на русском](README.ru.md)
+**Solution:** The ontology is split into two levels. Hard Core: fixed, repeatedly confirmed relationships. These change only by the Architect's decision. Hypothesis Periphery: dynamic hypothetical relationships, automatically detected by the Auditor. Each hypothesis carries a confirmation counter and, after N independent confirmations, is proposed for promotion to the Hard Core (but promoted only after Architect approval).
 
-## Problem
+**Experimental Verification:** Required. Seed the system with 10 known entity relationships and 3 deliberately ambiguous ones. After 5 audit cycles, verify: the Auditor has surfaced the 3 ambiguous relationships as hypotheses with confirmation counters; none have been auto-promoted without approval.
 
-Жёсткие заранее определённые онтологии не способны отражать новые связи, которые возникают в процессе работы системы. Необходим механизм, который позволяет органически выявлять новые связи, не разрушая проверенную структуру.
-
-## Solution
-
-Онтология разделяется на два уровня. Жёсткое ядро: зафиксированные, многократно подтверждённые связи. Изменяются только по решению Архитектора. Периферия предположений: динамические гипотетические связи, автоматически обнаруженные Аудитором. Каждая гипотеза имеет счётчик подтверждений и после N независимых подтверждений предлагается к переводу в жёсткое ядро (но переводится только после одобрения Архитектором).
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

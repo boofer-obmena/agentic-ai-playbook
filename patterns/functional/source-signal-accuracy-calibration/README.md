@@ -5,34 +5,19 @@ title_ru: "Паттерн 18. «Калибровка источников по �
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Source Signal Accuracy Calibration
 
 > **Паттерн 18. «Калибровка источников по точности сигнала» (Source Signal Accuracy Calibration)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** All data sources enter the system as if equally reliable, when their trustworthiness differs fundamentally. A record in a transactional database and a complaint in a team chat represent fundamentally different levels of reliability.
 
-[Читать на русском](README.ru.md)
+**Solution:** Each source is assigned a signal accuracy coefficient (Accuracy Score, 0 to 1). Approximate scale: 1.0 — transactional logs; 0.8 — formal technical documents; 0.7 — structured reports; 0.5 — unstructured documents; 0.3 — team chats and messengers. Assertions in the Facts Layer may only be formed from sources with a coefficient above a defined threshold (e.g., 0.7).
 
-## Problem
+**Experimental Verification:** Required. Feed the agent data from sources at different accuracy levels. Verify that assertions in the Facts Layer cite only sources at or above the threshold, and that lower-accuracy sources are confined to the Inferences Layer with appropriate caveats.
 
-Все источники данных поступают в систему как равноценные, хотя их достоверность принципиально различается. Запись в транзакционной БД и жалоба в рабочем чате — принципиально разные уровни достоверности.
-
-## Solution
-
-Каждому источнику присваивается коэффициент точности сигнала (Accuracy Score, от 0 до 1). Примерная шкала: 1.0 — транзакционные логи; 0.8 — формальные технические документы; 0.7 — структурированные отчёты; 0.5 — неструктурированные документы; 0.3 — рабочие чаты и мессенджеры. Формировать утверждения в «Слое фактов» можно только на основании источников с коэффициентом выше заданного порога (например, 0.7).
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

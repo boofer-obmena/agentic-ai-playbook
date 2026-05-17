@@ -5,9 +5,9 @@ title_ru: "Паттерн 38. «Градиентное хранение данн
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
@@ -15,24 +15,16 @@ related: []
 
 > **Паттерн 38. «Градиентное хранение данных» (Gradient Data Storage)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Not all data has the same access frequency or retrieval speed requirements. Storing everything in fast RAM is too expensive. Storing everything in slow long-term storage is too slow for active tasks.
 
-[Читать на русском](README.ru.md)
+**Solution:** Data is distributed across three storage tiers based on access frequency and latency sensitivity. Hot tier (RAM / cache): active context of the current task, frequently requested rules, the agent's "desktop." Warm tier (SSD / local DB): vector indices, history of the last N sessions, the project's active knowledge base. Cold tier (HDD / archival storage): historical logs, archived artifact versions, data from completed projects. Data automatically migrates between tiers according to defined rules (for example, data not accessed for 30 days moves from warm to cold tier).
 
-## Problem
+**Example:** To be developed.
 
-Разные данные имеют разную частоту доступа и разные требования к скорости извлечения. Хранить всё в быстрой оперативной памяти — слишком дорого. Хранить всё в медленном долгосрочном хранилище — слишком медленно для активных задач.
+**Related Entities:** To be developed.
 
-## Solution
+**Precondition:** To be developed.
 
-Данные распределяются по трём уровням хранения в зависимости от частоты доступа и критичности скорости. Горячий уровень (RAM / кэш): активный контекст текущей задачи, часто запрашиваемые правила, «рабочий стол» агента. Тёплый уровень (SSD / локальная БД): векторные индексы, история последних N сессий, оперативная база знаний проекта. Холодный уровень (HDD / архивное хранилище): исторические логи, архивные версии артефактов, данные завершённых проектов. Данные автоматически перемещаются между уровнями по заданным правилам (например, данные, не запрашивавшиеся 30 дней, перемещаются с тёплого на холодный уровень).
+**Experimental Verification:** To be developed.
 
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

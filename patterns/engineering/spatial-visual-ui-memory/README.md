@@ -1,46 +1,28 @@
 ---
 id: PATTERN-040
-title: "Spatial Visual Ui Memory"
+title: "Spatial-Visual UI Memory"
 title_ru: "Паттерн 40. «Пространственно-визуальная память интерфейсов» (Spatial-Visual UI Memory)"
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
+related: ["PATTERN-011"]
 ---
 
-# Spatial Visual Ui Memory
+# Spatial-Visual UI Memory
 
 > **Паттерн 40. «Пространственно-визуальная память интерфейсов» (Spatial-Visual UI Memory)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A significant portion of enterprise software exposes no API and is managed exclusively through a graphical interface. An agent working with such software, when an unforeseen situation arises (a pop-up window, a change in interface state), does not know what the previous context was and cannot correctly continue executing the task.
 
-[Читать на русском](README.ru.md)
+**Solution:** At each step of GUI interaction, a "visual state snapshot" is saved — a compact representation of the interface's accessibility tree with element coordinates, their types, and textual content. The snapshot is saved as part of a checkpoint (Pattern 011). When a divergence arises between the current interface state and the last saved snapshot, the agent detects the change, identifies new elements (e.g., a modal window), and decides how to handle the change before continuing the main task.
 
-## Problem
+**Example:** A first-line support agent executes a sequence of actions in an ERP system. At step 3, a system notification pops up with an "Accept" button. The agent compares the current accessibility tree with the saved snapshot from step 2. It detects a new element (a modal window), identifies it as a system notification and closes it. It returns to the main task, continuing from step 3.
 
-Значительная часть корпоративного программного обеспечения не имеет API и управляется исключительно через графический интерфейс. Агент, работающий с таким ПО, при возникновении непредвиденной ситуации (всплывшее окно, изменение состояния интерфейса) не знает, каким был предыдущий контекст, и не может корректно продолжить выполнение задачи.
+**Related Entities:** Pattern 011 (Orchestrator-Driven Explicit State Flow) — the orchestrator's checkpoints serve as the mechanism for saving visual state snapshots.
 
-## Solution
+**Experimental Verification:** Required. Create a test scenario of 5 steps of interacting with an application. At step 2, trigger a modal window programmatically. Verify: the agent detects the divergence from the saved tree of step 1, correctly identifies and handles the new element, resumes execution at the correct step.
 
-На каждом шаге взаимодействия с GUI сохраняется «снимок визуального состояния» — компактное представление дерева доступности интерфейса (Accessibility Tree) с координатами элементов, их типами и текстовым содержимым. Снимок сохраняется как часть Контрольной точки (Паттерн 20). При возникновении расхождения между текущим состоянием интерфейса и последним сохранённым снимком агент обнаруживает изменение, идентифицирует новые элементы (например, модальное окно) и принимает решение об обработке изменения перед продолжением основной задачи.
-
-## Example
-
-Агент 1-й линии поддержки выполняет последовательность действий в ERP-системе. На шаге 3 всплывает системное уведомление с кнопкой «Принять». Агент сравнивает текущее дерево доступности с сохранённым снимком шага 2. Обнаруживает новый элемент (модальное окно). Идентифицирует его как системное уведомление. Закрывает окно корректным образом. Возвращается к основной задаче, продолжая с шага 3.
-
-## Experimental Verification
-
-Создать тестовый сценарий из 5 шагов работы с приложением. На шаге 2 запрограммировать появление модального окна. Проверить: агент обнаруживает расхождение с сохранённым деревом шага 1, корректно идентифицирует и обрабатывает новый элемент, продолжает выполнение задачи с корректного места.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

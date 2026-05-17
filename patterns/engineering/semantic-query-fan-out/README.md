@@ -1,52 +1,30 @@
 ---
 id: PATTERN-033
-title: "Semantic Query Fan Out"
+title: "Semantic Query Fan-out"
 title_ru: "Паттерн 33. «Семантический веер запросов» (Semantic Query Fan-out)"
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
+related: ["PATTERN-015", "PATTERN-032"]
 ---
 
-# Semantic Query Fan Out
+# Semantic Query Fan-out
 
 > **Паттерн 33. «Семантический веер запросов» (Semantic Query Fan-out)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A single query to a vector knowledge base can miss the right semantic cluster — especially when the data is unstructured, meaning is expressed indirectly, or a single concept is represented by different words and formulations. The agent issues one query, gets a result that appears relevant, but is in fact just the nearest neighbor in vector space — not what was actually needed. The error goes unnoticed: RAG does not signal that it "found the wrong thing."
 
-[Читать на русском](README.ru.md)
+**Solution:** Instead of one query, the agent generates N semantically adjacent formulations revolving around a single semantic center — a "fan-out of queries." Each formulation describes the same concept from a different angle: using different words, through related notions, through a contrasting example, through a question about a consequence. All N queries are executed in parallel. The results are aggregated into a "meaning cloud" — a full set of fragments retrieved by the different queries. From this cloud, the agent synthesizes a final answer, explicitly documenting which query retrieved which fragment and what contribution each made to the final conclusion (Chain-of-Thought with traceability). Fragments that appear in the results of multiple queries receive elevated weight — the intersection of multiple formulations indicates high semantic precision.
 
-## Problem
+**Example:** An analyst agent searches a knowledge base for a method to evaluate a counterparty's credit risk. A single query for "credit risk assessment" returns a general article on risk management — not the right result. The agent applies a fan-out: query 1 — "methods for analyzing a counterparty's solvency"; query 2 — "how to determine the probability of default for a counterparty"; query 3 — "scoring models for borrower evaluation"; query 4 — "signs of financial instability in a counterparty." The results of the four queries form a cloud of 12 fragments. Three fragments appeared in the results of two or more queries — they receive elevated weight. The agent synthesizes an answer, citing specific fragments and the queries that found them.
 
-Единственный запрос к векторной базе знаний может не попасть в нужный смысловой кластер — особенно когда данные неформализованы, смысл выражен косвенно или один и тот же концепт представлен разными словами и формулировками. Агент делает один запрос, получает результат, который кажется релевантным, но на самом деле является ближайшим соседом по вектору — а не тем, что действительно нужно. Ошибка остаётся незамеченной: RAG не сообщает о том, что «нашёл не то».
+**Related Entities:** Pattern 032 (Agentic RAG with Tool-Augmented Closed Loop) — the patterns complement each other and address different problems. Pattern 032 is about depth: the agent decides whether additional searching is needed, going deeper sequentially. Pattern 033 is about breadth of coverage: the agent initially ensures wide semantic coverage through parallel queries. In complex analytical tasks, both patterns are applied together: first the fan-out provides wide initial coverage, then the iterative loop refines individual directions. Pattern 015 (Operational Metric-Driven Co-Design Loop) — operational metrics are used to evaluate the effectiveness of the query fan-out.
 
-## Solution
+**Precondition:** This pattern is viable only on infrastructure designed according to the throughput capacity principle (see the Key Architectural Principles section). If the latency of a single vector database query is already approaching the acceptable latency threshold, launching a fan-out of N queries will multiply latency by N and make the pattern counterproductive. Before applying the pattern, verify: single-query latency × N queries in the fan-out ≤ the acceptable agent response delay. If the condition is not met — optimize the infrastructure first (chunk size, index type, hot cache) before applying the fan-out.
 
-Вместо одного запроса агент генерирует N семантически смежных формулировок об одном и том же смысловом центре — «веер запросов». Каждая формулировка описывает тот же концепт с другой стороны: другими словами, через смежные понятия, через контрастирующий пример, через вопрос о следствии. Все N запросов выполняются параллельно. Результаты агрегируются в «облако смыслов» — полный набор фрагментов, извлечённых разными запросами. Из этого облака агент синтезирует итоговый ответ, явно документируя, какой запрос дал какой фрагмент и какой вклад внёс в финальный вывод (Chain-of-Thought с прослеживаемостью). Фрагменты, встретившиеся в результатах нескольких запросов одновременно, получают повышенный вес — пересечение нескольких формулировок указывает на высокую смысловую точность.
+**Experimental Verification:** Required. Select a knowledge base with unstructured content (literary text, interview transcripts, regulatory documents with vague wording). Formulate 10 questions whose answers exist in the base but are not expressed in obvious terms. Test A: single query. Test B: fan-out of 4 queries with aggregation. Measure: the proportion of questions for which a correct answer was obtained in each mode. Expected improvement in fan-out mode: 30–50% increase in precision on unstructured data.
 
-## Example
-
-Агент-аналитик ищет в базе знаний метод оценки кредитного риска контрагента. Единственный запрос «оценка кредитного риска» возвращает общую статью о риск-менеджменте — не то. Агент применяет веер: запрос 1 — «методы анализа платёжеспособности контрагента»; запрос 2 — «как определить вероятность дефолта по контрагенту»; запрос 3 — «скоринговые модели для оценки заёмщика»; запрос 4 — «признаки финансовой нестабильности контрагента». Результаты четырёх запросов формируют облако из 12 фрагментов. Три фрагмента встретились в результатах двух и более запросов — они получают повышенный вес. Агент синтезирует ответ, ссылаясь на конкретные фрагменты и запросы, которые их нашли.
-
-Связь с Паттерном И3 (Агентный RAG с итеративным циклом): Паттерны дополняют друг друга и решают разные проблемы. Паттерн 15 — про глубину: агент решает, нужно ли искать ещё, последовательно уходя глубже. Паттерну И4 — про ширину покрытия: агент исходно обеспечивает широкое семантическое покрытие параллельными запросами. В сложных аналитических задачах оба паттерна применяются совместно: сначала веер обеспечивает широкое начальное покрытие, затем итеративный цикл уточняет отдельные направления.
-
-## Предусловие применения
-
-Паттерн эффективен только на инфраструктуре, спроектированной по принципу пропускной способности (см. раздел «Ключевые архитектурные принципы»). Если скорость одиночного запроса к векторной базе уже близка к допустимому пределу задержки, запуск веера из N запросов умножит задержку в N раз и сделает паттерн контрпродуктивным. Перед применением паттерна убедиться: время одиночного запроса × N запросов в вере ≤ допустимая задержка ответа агента. Если условие не выполняется — сначала оптимизировать инфраструктуру (размер чанков, тип индекса, горячий кэш), и только затем применять веер.
-
-## Experimental Verification
-
-Выбрать базу знаний с неформализованным содержимым (художественный текст, транскрипты интервью, нормативные документы с размытыми формулировками). Сформулировать 10 вопросов, ответы на которые в базе присутствуют, но не в очевидных словах. Тест A: одиночный запрос. Тест B: веер из 4 запросов с агрегацией. Измерить: процент вопросов, на которые получен корректный ответ в каждом режиме. Ожидаемое улучшение в режиме веера: 30–50% прирост точности на неформализованных данных.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

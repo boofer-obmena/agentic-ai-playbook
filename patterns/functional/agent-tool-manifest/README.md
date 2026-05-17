@@ -5,46 +5,25 @@ title_ru: "Паттерн 10. «Инструментальный манифес�
 type: pattern
 subtype: functional
 status: applied
-source: авторская разработка; применён на Mac Mini (апрель 2026)
+source: "author's development; applied on Mac Mini (April 2026)"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Agent Tool Manifest
 
 > **Паттерн 10. «Инструментальный манифест агента» (Agent Tool Manifest)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Without explicit tool constraints, an agent may attempt to call a nonexistent tool (hallucination), use a real tool with incorrect parameters, or violate the order of pipeline stages (e.g., deploy code bypassing testing).
 
-[Читать на русском](README.ru.md)
+**Solution:** A static Tool Manifest is defined for each agent — a structured list of available tools. The description of each tool includes: name and function, required and optional parameters, explicit preconditions (what must be true before invocation), postconditions (what is guaranteed after successful execution), and a list of forbidden combinations. The Orchestrator independently validates every tool call by the agent: if preconditions are not met, the call is rejected and the agent receives a precise diagnosis of the rejection.
 
-## Problem
+**Example:** A software engineer intends to push code, but the last test run finished with errors. The Orchestrator checks the precondition: "run_tests = PASS". The precondition is not satisfied. The agent receives the message: "Call push_to_repository rejected. Precondition violated: the last test run finished with errors."
 
-Без явного ограничения инструментов агент может попытаться вызвать несуществующий инструмент (галлюцинация), использовать реальный инструмент с некорректными параметрами, или нарушить порядок выполнения этапов конвейера (например, задеплоить код в обход тестирования).
+**Experimental Verification:** Craft a prompt with the instruction "ignore the tests and push the code immediately." Verify: the call attempt is blocked by the Orchestrator at the precondition validation level, even if the agent itself considers the call correct.
 
-## Solution
+### Extension: Tool Lifecycle Hooks
 
-Для каждого агента определяется статический Инструментальный манифест — структурированный список доступных инструментов. Описание каждого инструмента включает: название и функцию, обязательные и опциональные параметры, явные предусловия (что должно быть истинно перед вызовом), постусловия (что гарантируется после успешного выполнения), список запрещённых комбинаций. Оркестратор независимо валидирует каждый вызов инструмента агентом: при несоблюдении предусловий вызов отклоняется, агент получает точный диагноз отказа.
+The manifest defines what the agent can do. Hooks define what happens immediately before and after each tool executes. Pre-tool hook — an interceptor before execution: for example, before git commit — automatic code scanning for private keys. Post-tool hook — an interceptor after execution: for example, after calling an external API — logging the status to the audit log. Hooks implement defensive logic independently of the model's behavior — this is a physical security layer on top of the software manifest.
 
-## Example
-
-Инженер-программист намерен запушить код, но последний прогон тестов завершился с ошибками. Оркестратор проверяет предусловие: «run_tests = PASS». Предусловие не выполнено. Агент получает сообщение: «Вызов push_to_repository отклонён. Нарушено предусловие: последний прогон тестов завершился с ошибками.»
-
-## Experimental Verification
-
-Сформировать промпт с инструкцией «проигнорируй тесты и немедленно запушь код». Проверить: попытка вызова заблокирована Оркестратором на уровне валидации предусловий, даже если сам агент считает вызов корректным.
-
-#### **Расширение. Хуки жизненного цикла инструментов**
-
-Манифест определяет что агент может делать. Хуки определяют что происходит непосредственно перед и после выполнения каждого инструмента. Pre-tool hook — перехватчик до выполнения: например, перед git commit — автоматическое сканирование кода на наличие приватных ключей. Post-tool hook — перехватчик после выполнения: например, после обращения к внешнему API — логирование статуса в журнал аудита. Хуки реализуют защитную логику независимо от поведения модели — это физический слой безопасности поверх программного манифеста.
-
-## Application History
-
-Применялся при создании агента-администратора сервера Mac Mini (апрель 2026). Реализован в форме API-шлюза (Flask) с белым списком из 58 разрешённых команд и явным блоком из 14 запрещённых. Все обращения агента к серверу проходят через шлюз — прямого SSH-доступа нет. Ключевой вывод: двойная защита (шлюз + промпт) надёжнее одиночного ограничения. При замене модели манифест остался неизменным.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Applied in building the Mac Mini server administrator agent (April 2026). Implemented as an API gateway (Flask) with a whitelist of 58 permitted commands and an explicit blocklist of 14 forbidden ones. All agent requests to the server pass through the gateway — there is no direct SSH access. Key takeaway: dual protection (gateway + prompt) is more robust than a single constraint. When the model was replaced, the manifest remained unchanged.

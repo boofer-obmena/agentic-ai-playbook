@@ -1,50 +1,30 @@
 ---
 id: PATTERN-024
-title: "Closed Loop Co Testing"
+title: "Closed-Loop Co-Testing"
 title_ru: "Паттерн 24. «Замкнутый цикл совместного тестирования» (Closed-Loop Co-Testing)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
+related: ["PATTERN-020", "PATTERN-033"]
 ---
 
-# Closed Loop Co Testing
+# Closed-Loop Co-Testing
 
 > **Паттерн 24. «Замкнутый цикл совместного тестирования» (Closed-Loop Co-Testing)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Testing of a communication agent and a knowledge base is conducted in isolation and sequentially. This doubles the time and resource cost, and — more importantly — yields no information about the quality of interaction between the components under real conditions. The communication agent and the knowledge base can individually show acceptable results, yet produce poor quality in combination.
 
-[Читать на русском](README.ru.md)
+**Solution:** The two components are tested jointly in a closed iterative loop. The communication agent generates fan-out queries (per Pattern E9) and directs them to the knowledge base. The KB returns a cloud of chunks. The Field Analyst — a subject-matter expert on the knowledge base domain — evaluates the relevance of the KB's responses. The Tester agent manages the loop and evaluates the quality of the communication agent's queries. A single run of the loop yields two independent quality measurements: a metric for the communication agent and a metric for the knowledge base. The loop iterates — not linear, but closed.
 
-## Problem
+Participants: Communication Agent (generates queries) → Knowledge Base (returns chunks) → Field Analyst (evaluates KB response quality) → Tester (manages the loop, evaluates communication agent query quality).
 
-Тестирование коммуникационного агента и базы знаний проводится изолированно и последовательно. Это требует двойных затрат времени и ресурсов, а главное — не даёт информации о качестве взаимодействия между компонентами в реальных условиях. Агент-коммуникатор и база знаний могут по отдельности показывать приемлемые результаты, но давать низкое качество в связке.
+Principle behind the pattern: Look for architectural situations where testing multiple components can be combined into a closed loop — a single process evaluates several participants at once. Not a linear run, but a loop. Applicable to two, three, or more components simultaneously.
 
-## Solution
+**Related Entities:** Pattern 033 (Semantic Query Fan-out) — the communication agent applies the fan-out query technique. Pattern 20 (Ratchet Loop) — test results become the foundation for improving both communication agent prompts and knowledge base content.
 
-Два компонента тестируются совместно в замкнутом итеративном цикле. Агент-коммуникатор формирует веерные запросы (по Паттерну И9) и направляет их в базу знаний. База возвращает облако чанков. Боевой аналитик — subject-matter expert по теме базы знаний — оценивает релевантность ответов базы. Агент-тестировщик управляет циклом и оценивает качество вопросов коммуникатора. Один прогон цикла даёт два независимых измерения качества: метрика коммуникатора и метрика базы знаний. Цикл итерируется — не линейный, а замкнутый.
+**Experimental Verification:** Required. Deploy a test scenario: a KB with known content, a communication agent, an analyst, and a tester. Run 5 loop iterations. Measure: the trajectory of the communication agent's query accuracy metric (should rise), the trajectory of KB chunk relevance (reveals indexing weak spots). Compare with isolated testing of the same components: total time and completeness of issues discovered.
 
-Участники: Коммуникатор (формирует запросы) → База знаний (возвращает чанки) → Боевой аналитик (оценивает качество ответов KB) → Тестировщик (управляет циклом, оценивает качество вопросов коммуникатора).
-
-Принцип за паттерном: Искать архитектурные ситуации, где тестирование нескольких компонентов можно объединить в замкнутый цикл — один процесс даёт оценку сразу нескольким участникам. Не линейный прогон, а loop. Применимо к двум, трём и более компонентам одновременно.
-
-## Связь с другими паттернами
-
-Паттерну И9 (Семантический веер) — коммуникатор применяет веерную технику формирования запросов. Паттерн 20 (Ratchet Loop) — результаты тестирования становятся основой для улучшения как промптов коммуникатора, так и наполнения базы знаний.
-
-## Experimental Verification
-
-Развернуть тестовый сценарий: KB с известным содержимым, коммуникатор, аналитик, тестировщик. Провести 5 итераций цикла. Измерить: динамику метрики точности запросов коммуникатора (должна расти), динамику релевантности чанков KB (выявляет слабые места индексирования). Сравнить с изолированным тестированием тех же компонентов: суммарное время и полнота обнаруженных проблем.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

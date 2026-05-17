@@ -1,46 +1,26 @@
 ---
 id: PATTERN-029
-title: "Append Only Session Log"
+title: "Append-Only Session Log"
 title_ru: "Паттерн 29. «Журнал сессии в режиме только-добавления» (Append-Only Session Log)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
+related: ["PATTERN-009", "PATTERN-027"]
 ---
 
-# Append Only Session Log
+# Append-Only Session Log
 
 > **Паттерн 29. «Журнал сессии в режиме только-добавления» (Append-Only Session Log)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A long-running autonomous agent accumulates valuable internal state: decision history, sub-agent results, analyzed data. A process crash, network disruption, or container restart destroys this state. Storing state in a database requires managing transactions and schemas, slowing every step of the agent.
 
-[Читать на русском](README.ru.md)
+**Solution:** All agent session state is continuously written to a file in append-only mode. Each event — a new model output, a tool invocation, a context compaction trigger, an error — is appended as a separate line to the end of the file. The file is never overwritten. On failure and restart, the agent reads the file line by line from the beginning, replays the event history, and recovers state up to the failure point in milliseconds. Log management is placed outside the agent's own logic — software failures of the agent do not corrupt already-written data.
 
-## Problem
+**Related Entities:** Pattern 9 (Immutable States) — the append-only log is a practical implementation of the immutability principle. Pattern 27 (Semantic Context Compaction) — context compaction events are recorded in the log, enabling precise reconstruction of the agent's memory state at any point in time.
 
-Долгоживущий автономный агент накапливает ценное внутреннее состояние: историю решений, результаты субагентов, проанализированные данные. Сбой процесса, обрыв сети или перезапуск контейнера уничтожают это состояние. Хранение состояния в базе данных требует управления транзакциями и схемами, замедляя каждый шаг агента.
+**Experimental Verification:** Required. Launch an agent on a long task. Midway through execution, forcibly terminate the process (kill -9). Restart the agent. Measure: state recovery time (target: under 1 second), recovery accuracy (agent resumes from the correct point, does not repeat already-completed steps).
 
-## Solution
-
-Всё состояние сессии агента непрерывно записывается в файл в режиме только-добавления (Append-Only). Каждое событие — новый вывод модели, вызов инструмента, срабатывание сжатия контекста, ошибка — дописывается отдельной строкой в конец файла. Файл никогда не перезаписывается. При сбое и перезапуске агент читает файл строчка за строчкой с самого начала, воспроизводит историю событий и восстанавливает состояние до момента сбоя за миллисекунды. Управление журналом выносится за пределы логики самого агента — программные сбои агента не повреждают уже записанные данные.
-
-## Связь с другими паттернами
-
-Паттерн 9 (Неизменяемые состояния) — Append-Only журнал является практической реализацией принципа неизменяемости. Паттерн 27 (Семантически умное сжатие контекста) — события сжатия контекста фиксируются в журнале, что позволяет точно воспроизвести состояние памяти агента на любой момент времени.
-
-## Experimental Verification
-
-Запустить агента на длинной задаче. На середине выполнения принудительно завершить процесс (kill -9). Перезапустить агента. Измерить: время восстановления состояния (цель — менее 1 секунды), точность восстановления (агент продолжает с правильной точки, не повторяет выполненные шаги).
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

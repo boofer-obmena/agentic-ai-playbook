@@ -5,9 +5,9 @@ title_ru: "Паттерн 36. «Интеллектуальная маршрут�
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
@@ -15,32 +15,12 @@ related: []
 
 > **Паттерн 36. «Интеллектуальная маршрутизация с самооценкой сложности» (Intelligent Model Routing)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** All requests are processed by the same powerful LLM regardless of task complexity. Updating a task status in a tracker, routing an incoming message by category, checking a field format — none of these operations require a powerful model. Using excessive resources leads to unnecessary computational overhead.
 
-[Читать на русском](README.ru.md)
+**Solution:** Each request undergoes a preliminary complexity assessment. The agent explicitly sets a complexity flag based on the task's characteristics. The router directs the request to the appropriate resource according to a "Task Type → Model" map. Simple tasks: deterministic operations (format validation, status updates, keyword-based routing) — routed to a raw SQL query or RegEx handler without an LLM. Standard tasks: data structuring, entity extraction, generating standard artifacts — a lightweight or medium LLM. Complex tasks: analytics, architectural decisions, ambiguity resolution — a full-power LLM with thinking mode.
 
-## Problem
+**Example:** A pipeline receives 100 requests per hour. 45 — status updates for tasks (Simple, direct SQL). 30 — generating standard functional requirements (FR) from a template (Standard, medium LLM). 25 — analytics of complex requirements with contradictions (Complex, full-power LLM). As a result of routing: 45% of requests consume no LLM resources at all, 30% — minimal resources, only 25% — maximum resources.
 
-Все запросы обрабатываются одной и той же мощной LLM вне зависимости от сложности задачи. Обновление статуса задачи в трекере, маршрутизация входящего сообщения по категории, проверка формата поля — все эти операции не требуют мощной модели. Использование избыточного ресурса приводит к неоправданным затратам вычислительного бюджета.
+**Experimental Verification:** Required. Prepare a mixed set of 100 tasks with a known optimal model for each (Simple/Standard/Complex). Run through the router. Measure: classification accuracy (proportion of tasks directed to the optimal resource) and total GPU budget expenditure. Goal: 40%+ cost reduction while maintaining result quality.
 
-## Solution
-
-Каждый запрос проходит предварительную оценку сложности. Агент явно выставляет флаг сложности на основе характеристик задачи. Маршрутизатор направляет запрос на соответствующий ресурс согласно карте «Тип задачи → Модель». Простые (Simple) задачи: детерминированные операции (проверка формата, обновление статуса, маршрутизация по ключевым словам) — направляются на прямой SQL-запрос или RegEx-обработчик без LLM. Стандартные (Standard) задачи: структурирование данных, извлечение сущностей, формирование стандартных артефактов — лёгкая или средняя LLM. Сложные (Complex) задачи: аналитика, архитектурные решения, обработка неоднозначностей — полная мощная LLM с режимом мышления.
-
-## Example
-
-В конвейере поступает 100 запросов за час. 45 — обновления статусов задач (Simple, прямой SQL). 30 — формирование стандартных ФТ по шаблону (Standard, средняя LLM). 25 — аналитика сложных требований с противоречиями (Complex, полная LLM). В результате маршрутизации: 45% запросов не потребляют LLM-ресурс вообще, 30% — минимальный ресурс, только 25% — максимальный ресурс.
-
-## Experimental Verification
-
-Подготовить смешанный набор из 100 задач с заранее известной оптимальной моделью для каждой (Simple/Standard/Complex). Запустить через маршрутизатор. Измерить точность классификации (процент задач, направленных на оптимальный ресурс) и суммарные расходы GPU-бюджета. Цель: снижение расходов на 40%+ при сохранении качества результатов.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

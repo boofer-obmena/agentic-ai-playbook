@@ -1,58 +1,38 @@
 ---
 id: PATTERN-023
-title: "Multi Variant Plan Generator"
+title: "Multi-Variant Plan Generator"
 title_ru: "Паттерн 23. «Многовариантный генератор плана» (Multi-Variant Plan Generator)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
-# Multi Variant Plan Generator
+# Multi-Variant Plan Generator
 
 > **Паттерн 23. «Многовариантный генератор плана» (Multi-Variant Plan Generator)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** When presented with a complex task, an agent generates a single plan and immediately proceeds to execute it. If the plan turns out to be suboptimal or non-viable, this only becomes apparent during execution — after significant resources have already been spent. Alternative approaches are never considered.
 
-[Читать на русском](README.ru.md)
+**Solution:** Before beginning execution, the agent generates N independent plan variants (typically 3–5). Each variant is evaluated against a set of criteria: speed to result, required resources, resilience to failure, and compliance with constraints. The Orchestrator or human architect selects the optimal variant for execution. The remaining variants are preserved as "fallback routes" — ready to be activated if the primary plan fails.
 
-## Problem
+**Example:** Task: migrate a database with zero data loss and minimal downtime. Variant A: blue-green deployment (zero downtime, high complexity, requires double the resources). Variant B: migration during a maintenance window (2-hour downtime, low complexity, minimal resources). Variant C: gradual migration via replication (minimal risk, long duration). The architect selects variant B as optimal given the current constraints.
 
-При получении сложной задачи агент генерирует единственный план и немедленно приступает к его выполнению. Если план оказывается неоптимальным или нежизнеспособным, это обнаруживается только в процессе выполнения — после затраты значительных ресурсов. Альтернативные подходы не рассматриваются.
+### Extension: Spawn-Restrict-Collect
 
-## Solution
+Once a route is selected, the master Orchestrator agent does not execute everything sequentially itself. Instead:
 
-Перед началом выполнения агент генерирует N независимых вариантов плана (обычно 3–5). Каждый вариант оценивается по набору критериев: скорость достижения результата, требуемые ресурсы, устойчивость к сбоям, соответствие ограничениям. Оркестратор или человек-архитектор выбирает оптимальный вариант для выполнения. Остальные варианты сохраняются как «запасные маршруты» — к ним можно вернуться при сбое основного плана.
+**Spawn** — spawns sub-agents for parallel execution of independent sub-tasks. Each sub-agent receives an isolated session with a clean context.
 
-## Example
+**Restrict** — each sub-agent is issued a deliberately reduced tool set scoped to its specific sub-task. An agent analyzing documentation has no physical access to file-editing tools.
 
-Задача: мигрировать базу данных без потери данных и с минимальным даунтаймом. Вариант A: blue-green deployment (нулевой даунтайм, высокая сложность, требует двойных ресурсов). Вариант B: миграция в техническое окно (даунтайм 2 часа, низкая сложность, минимальные ресурсы). Вариант C: постепенная миграция через репликацию (минимальный риск, высокая продолжительность). Архитектор выбирает вариант B как оптимальный для текущих ограничений.
+**Collect** — the Orchestrator gathers sub-agent results, integrates them into the overall solution architecture, and "completes the contract" with each sub-agent.
 
-#### **Расширение. Spawn-Restrict-Collect**
+Key properties: parallelism (execution time is determined by the longest task, not the sum of all); context isolation; least privilege (a sub-agent cannot cause harm outside its perimeter).
 
-Когда выбран маршрут, главный агент-оркестратор не выполняет всё последовательно сам. Вместо этого:
+**Experimental Verification:** Required. Present the agent with a task that has two fundamentally different solution approaches. Verify: the agent generates both variants, explicitly describes the trade-offs of each, and does not begin execution until it receives a selection from the Orchestrator or human architect.
 
-Spawn — порождает субагентов для параллельного выполнения независимых подзадач. Каждый субагент получает изолированную сессию с чистым контекстом.
-
-Restrict — каждому субагенту выдаётся намеренно урезанный набор инструментов под его конкретную подзадачу. Агент, анализирующий документацию, физически не имеет доступа к инструментам редактирования файлов.
-
-Collect — оркестратор собирает результаты субагентов, встраивает их в общую архитектуру решения и «завершает контракт» с каждым субагентом.
-
-Ключевые свойства: параллельность (время выполнения определяется самой долгой задачей, а не суммой всех); изоляция контекстов; минимизация прав (субагент не может навредить за пределами своего периметра).
-
-## Experimental Verification
-
-Предложить агенту задачу, для которой существуют два кардинально разных подхода. Проверить: агент генерирует оба варианта, явно описывает trade-offs каждого, не приступает к выполнению до получения выбора от оркестратора или человека.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

@@ -1,42 +1,30 @@
 ---
 id: PATTERN-041
-title: "Adaptive Load Management"
+title: "Adaptive Load Management (Circuit Breaker)"
 title_ru: "Паттерн 41. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)"
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
-# Adaptive Load Management
+# Adaptive Load Management (Circuit Breaker)
 
 > **Паттерн 41. «Адаптивное управление нагрузкой (Circuit Breaker)» (Adaptive Load Management)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** When an external system or model is overloaded, the agent continues sending requests, worsening the situation. Repeated retries to an unavailable service lead to a cascading failure: the request queue grows, resources are exhausted, the system does not recover.
 
-[Читать на русском](README.ru.md)
+**Solution:** The Circuit Breaker pattern is implemented with three states. Closed (normal): requests pass through, errors are counted. Open (failure mode): when errors exceed the threshold within the configured time window — the Circuit Breaker transitions to Open. All requests are immediately rejected with the response "service temporarily unavailable," without attempting a call. Half-Open (probe): after a defined interval, the Circuit Breaker lets through a test request. On success — transitions to Closed. On failure — transitions back to Open.
 
-## Problem
+**Example:** To be developed.
 
-При перегрузке внешней системы или модели агент продолжает отправлять запросы, усугубляя ситуацию. Повторные попытки при недоступном сервисе приводят к каскадному отказу: очередь запросов растёт, ресурсы истощаются, система не восстанавливается.
+**Related Entities:** To be developed.
 
-## Solution
+**Precondition:** To be developed.
 
-Реализуется паттерн Circuit Breaker (Автоматический выключатель) с тремя состояниями. Closed (норма): запросы проходят, ошибки подсчитываются. Open (аварийный режим): при превышении порога ошибок за период — Circuit Breaker переходит в Open. Все запросы немедленно отклоняются с диагнозом «сервис временно недоступен», без попыток вызова. Half-Open (проверка): через заданный интервал Circuit Breaker пропускает пробный запрос. При успехе — возвращается в Closed. При неудаче — снова Open.
+**Experimental Verification:** Required. Simulate the unavailability of an external API. Verify: after N errors, the Circuit Breaker transitions to Open, requests are rejected immediately, the state transition is recorded in the log. After the API recovers — automatic transition to Closed.
 
-## Experimental Verification
-
-Симулировать недоступность внешнего API. Проверить: после N ошибок Circuit Breaker переходит в Open, запросы отклоняются немедленно, в журнале фиксируется переход состояния. После восстановления API — автоматический переход в Closed.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

@@ -1,42 +1,30 @@
 ---
 id: PATTERN-037
-title: "Multi Vector Semantic Index"
+title: "Multi-Vector Semantic Index"
 title_ru: "Паттерн 37. «Мультивекторный семантический индекс» (Multi-Vector Semantic Index)"
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
-# Multi Vector Semantic Index
+# Multi-Vector Semantic Index
 
 > **Паттерн 37. «Мультивекторный семантический индекс» (Multi-Vector Semantic Index)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A single way of representing a document in vector space does not capture all aspects of its content. A query about a technical error does not find a document that describes the same problem in business process terms. A search for an exact formulation misses semantically close but differently worded fragments.
 
-[Читать на русском](README.ru.md)
+**Solution:** Each document is indexed in several ways simultaneously: Full-text vector representation (dense embedding): semantic proximity. Keywords (BM25 / sparse): exact term matches. Document summary: high-level meaning. Structured metadata: document type, date, author, related systems. At query time, hybrid search is used: results from different indices are weighted and combined through a ranking algorithm (Reciprocal Rank Fusion or equivalent).
 
-## Problem
+**Example:** To be developed.
 
-Один способ представления документа в векторном пространстве не охватывает все аспекты его содержания. Запрос на техническую ошибку не находит документ, описывающий ту же проблему в терминах бизнес-процесса. Поиск по точной формулировке упускает семантически близкие, но иначе сформулированные фрагменты.
+**Related Entities:** To be developed.
 
-## Solution
+**Precondition:** To be developed.
 
-Каждый документ индексируется несколькими способами одновременно: Векторное представление полного текста (dense embedding): семантическая близость. Ключевые слова (BM25 / sparse): точные совпадения терминов. Резюме документа: высокоуровневый смысл. Структурированные метаданные: тип документа, дата, автор, связанные системы. При запросе используется гибридный поиск: результаты из разных индексов взвешиваются и объединяются через алгоритм ранжирования (Reciprocal Rank Fusion или аналог).
+**Experimental Verification:** Required. Prepare a set of 20 test queries with known relevant documents. Compare recall@10 for single-vector and multi-vector indices. Expected result: the multi-vector index shows 20–40% higher recall.
 
-## Experimental Verification
-
-Сформировать набор из 20 тестовых запросов с заранее известными релевантными документами. Сравнить recall@10 для одновекторного и мультивекторного индекса. Ожидаемый результат: мультивекторный индекс показывает на 20–40% более высокий recall.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

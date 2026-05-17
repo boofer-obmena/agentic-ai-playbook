@@ -5,46 +5,25 @@ title_ru: "Паттерн 21. «Дебаты агентов» (Agent Debate)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Agent Debate
 
 > **Паттерн 21. «Дебаты агентов» (Agent Debate)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A single agent analyzing a complex task is prone to confirmation bias: it reinforces its initial hypothesis while ignoring or smoothing over contradictory signals. This is especially dangerous in architectural decisions, where a mistaken choice has long-term consequences.
 
-[Читать на русском](README.ru.md)
+**Solution:** Two or more agent instances receive the same input data but different roles: one argues "for," the other "against" the proposed solution. The Orchestrator relays the agents' positions to each other in turn (N rounds). A synthesizer-agent analyzes the final exchange and formulates a weighted conclusion. Key property: the agents are unaware of the opponent's existence before the debate begins — they formulate their positions independently.
 
-## Problem
+**Example:** A data storage architecture must be chosen: relational DB vs. document-oriented DB. Agent A argues for relational: transactional guarantees, strict schema, mature ecosystem. Agent B argues for document-oriented: schema flexibility, horizontal scaling, development speed. After three rounds, the synthesizer-agent formulates a recommendation with explicit trade-offs for each option.
 
-Один агент, анализирующий сложную задачу, склонен к конфирмационному смещению: он усиливает первоначальную гипотезу, игнорируя или сглаживая противоречивые сигналы. Это особенно опасно при архитектурных решениях, где ошибочный выбор имеет долгосрочные последствия.
+### Application Context: Jagged Intelligence
 
-## Solution
+Agent debate is especially valuable under conditions of "Jagged Intelligence" — the phenomenon where an agent demonstrates exceptional performance on some tasks and unexpected failures on adjacent ones. Uniform competence cannot be assumed: a model may brilliantly analyze technical code while making gross errors in planning logic. When designing debates, select agents whose competence "jags" lie in different areas — so that the strengths of one compensate for the weaknesses of the other.
 
-Две или более инстанции агента получают одинаковые входные данные, но разные роли: один аргументирует «за», другой — «против» предложенного решения. Оркестратор поочерёдно передаёт позиции агентов друг другу (N раундов). Агент-синтезатор анализирует итоговый обмен и формулирует взвешенное заключение. Ключевое свойство: агенты не знают о наличии оппонента до начала дебатов — они формулируют позицию независимо.
+**Experimental Verification:** Take a task with a known correct answer that contradicts the intuitive one. Run a single agent (control) and two agents in debate mode. Compare the quality of the final decision. Expected result: debate mode more frequently leads to the correct answer, by surfacing weaknesses in the initial position.
 
-## Example
-
-Необходимо выбрать архитектуру хранения данных: реляционная БД vs. документоориентированная. Агент А аргументирует за реляционную: транзакционность, строгая схема, зрелая экосистема. Агент Б аргументирует за документоориентированную: гибкость схемы, горизонтальное масштабирование, скорость разработки. После трёх раундов агент-синтезатор формулирует рекомендацию с явным указанием trade-offs каждого варианта.
-
-#### **Контекст применения. Зубчатый интеллект**
-
-Дебаты агентов особенно ценны в условиях «зубчатого интеллекта» (Jagged Intelligence) — феномена, при котором агент демонстрирует исключительные результаты в одних задачах и неожиданные провалы в соседних. Нельзя предполагать равномерную компетентность: модель может блестяще анализировать технический код и совершать грубые ошибки в логике планирования. При проектировании дебатов выбирать агентов так, чтобы их «зубцы» компетентности находились в разных областях — тогда сильные стороны одного компенсируют слабые стороны другого.
-
-## Experimental Verification
-
-Взять задачу с заведомо правильным ответом, который противоречит интуитивному. Запустить одного агента (контроль) и двух агентов в режиме дебатов. Сравнить качество финального решения. Ожидаемый результат: режим дебатов чаще приводит к правильному ответу за счёт выявления слабых мест в исходной позиции.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

@@ -1,46 +1,26 @@
 ---
 id: PATTERN-030
-title: "Active Learning Via Artifact Correction"
-title_ru: "Паттерн 30. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)"
+title: "Active Learning via Artifact Correction"
+title_ru: "Паттерн 030. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)"
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
+related: ["PATTERN-020"]
 ---
 
-# Active Learning Via Artifact Correction
+# Active Learning via Artifact Correction
 
-> **Паттерн 30. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)**
+> **Паттерн 030. «Активное обучение через коррекцию артефакта» (Active Learning via Artifact Correction)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Static prompts do not adapt to the specifics of a particular organization, the style of its documents, or the preferences of individual users. A system that works correctly "on average" can systematically produce results that require manual rework in a specific context.
 
-[Читать на русском](README.ru.md)
+**Solution:** Every manual correction of an artifact made by a human is automatically converted into a training pair: "Agent's original version → Human's corrected version." This pair is added to the vector database as a few-shot example for future similar queries. The learning loop operates exclusively on the ground-truth facts layer: the human corrects a fact, the system rebuilds the projection. Corrections of suboptimal plans (see Pattern 20) are captured separately: they create "Suboptimal Plan → Preferred Plan" pairs. After accumulating a sufficient number of training pairs, the agent begins reproducing the preferred style without manual intervention.
 
-## Problem
+**Example:** An analyst agent produces functional requirements in an academic style. A methodologist corrects several items, rephrasing them in the organization's more operational style. The system captures three training pairs. On the fourth request, the agent independently uses the operational style. By the tenth, it fully reproduces the corporate template.
 
-Статичные промпты не адаптируются к специфике конкретной организации, стилю её документов и предпочтениям конкретных пользователей. Система, корректно работающая «в среднем», может систематически производить результаты, требующие ручной доводки в конкретном контексте.
+**Experimental Verification:** Required. Simulate 3 cycles of "request → agent output → manual correction." Record each correction as a training pair. On the 4th request of a similar type, the agent should independently apply the learned style without additional instructions.
 
-## Solution
-
-Каждое ручное исправление артефакта, произведённое человеком, автоматически превращается в обучающую пару: «Исходный вариант агента → Исправленный вариант человека». Эта пара добавляется в векторную базу как Few-Shot пример для будущих аналогичных запросов. Цикл обучения оперирует только на слое сырых фактов: человек правит факт, система пересобирает проекцию. Отдельно фиксируются правки неоптимальных планов (см. Паттерн 20): они создают пары «Неоптимальный план → Предпочтительный план». После накопления достаточного числа обучающих пар агент начинает воспроизводить предпочтительный стиль без ручного вмешательства.
-
-## Example
-
-Агент-аналитик формирует ФТ в академическом стиле. Методолог исправляет несколько пунктов, переформулируя их в более операционном стиле организации. Система фиксирует три обучающих пары. На четвёртый запрос агент самостоятельно использует операционный стиль. На десятый — полностью воспроизводит корпоративный шаблон.
-
-## Experimental Verification
-
-Смоделировать 3 цикла «запрос → вывод агента → ручная правка». Фиксировать каждое исправление как обучающую пару. На 4-м запросе аналогичного типа агент должен самостоятельно применить усвоенный стиль без дополнительных инструкций.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

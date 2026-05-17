@@ -1,42 +1,25 @@
 ---
 id: PATTERN-013
-title: "Compensating Saga"
+title: "Compensating Saga for AI-Powered Operations"
 title_ru: "Паттерн 13. «Компенсационная сага» (Compensating Saga for AI-Powered Operations)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
-# Compensating Saga
+# Compensating Saga for AI-Powered Operations
 
 > **Паттерн 13. «Компенсационная сага» (Compensating Saga for AI-Powered Operations)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Many operations in agent systems involve calls to external systems that cannot be rolled back in a standard way. If a failure occurs mid-way through a multi-step operation, the system is left in a partially executed state.
 
-[Читать на русском](README.ru.md)
+**Solution:** Every high-level operation that spans multiple external systems is designed as a Saga. Each step has an explicitly defined compensating action — an operation that semantically "undoes" the effect of the primary step. On failure, the Orchestrator invokes compensating actions in reverse order until a consistent initial state is reached.
 
-## Problem
+**Example:** The Developer Agent creates a Pull Request (step 1). It then attempts to create a linked task in the tracker (step 2) — the tracker is unavailable. The Orchestrator invokes the compensating action for step 1: closes the Pull Request with the comment "Automatically closed: pipeline failure at step 2."
 
-Многие операции в агентных системах включают вызовы внешних систем, которые нельзя откатить стандартным образом. Если в середине многошаговой операции происходит сбой, система оказывается в частично выполненном состоянии.
+**Experimental Verification:** Required. Model a saga of 3 steps where step 2 fails. Verify that compensation is invoked for step 1 only, and the system reaches a consistent state.
 
-## Solution
-
-Каждая высокоуровневая операция, затрагивающая несколько внешних систем, проектируется как Сага. Для каждого шага явно описывается компенсационное действие — операция, которая семантически «отменяет» эффект основного шага. При сбое Оркестратор вызывает компенсационные действия в обратном порядке до достижения согласованного начального состояния.
-
-## Example
-
-Developer Agent создаёт Pull Request (шаг 1). Затем пытается создать связанную задачу в трекере (шаг 2) — трекер недоступен. Оркестратор запускает компенсацию шага 1: закрывает Pull Request с комментарием «Автоматически закрыт: сбой конвейера на шаге 2.»
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

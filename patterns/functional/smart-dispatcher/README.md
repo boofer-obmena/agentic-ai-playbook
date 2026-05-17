@@ -5,50 +5,27 @@ title_ru: "Паттерн 6. «Фильтр-подбор (Умный диспе�
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
 # Smart Dispatcher
 
 > **Паттерн 6. «Фильтр-подбор (Умный диспетчер)» (Smart Dispatcher)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Manual assignment of tasks to executors is a bottleneck in any pipeline. Agents differ in competencies, current workload, and specialization. Without automated dispatching, tasks are distributed inefficiently.
 
-[Читать на русском](README.ru.md)
+**Solution:** The dispatch function selects the optimal executor agent based on two groups of filters. Static filters: competency matrix (which types of tasks the agent can handle), specialization. Dynamic filters: current workload, online status. When conditions are equal, the least-loaded criterion is applied.
 
-## Problem
+**Example:** A system has three developer agents. The first specializes in accounting modules, the second in integrations, the third is a generalist but is occupied with two tasks. An integration development task arrives. The Dispatcher selects the second agent as optimal by specialization.
 
-Ручное назначение задач исполнителям — узкое место в любом конвейере. Агенты различаются по компетенциям, текущей загруженности и специализации. Без автоматической диспетчеризации задачи распределяются неэффективно.
+**Experimental Verification:** Create a virtual pool of 3 agents with different competency matrices. Form a queue of 5 tasks of different types. Verify: each task is assigned to the agent that is optimal specifically for it.
 
-## Solution
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.
 
-Функция диспетчеризации выбирает оптимального агента-исполнителя на основе двух групп фильтров. Статические фильтры: матрица компетенций (какие типы задач умеет выполнять агент), специализация. Динамические фильтры: текущая загруженность, онлайн-статус. При равных условиях применяется критерий наименьшей загруженности.
+### Extension: Dispatcher-by-Goal (Analog Dispatcher)
 
-## Example
+The Dispatcher does not refuse — it looks for an analog. The basic dispatcher logic is to route a request to a resource. The extended logic is to route to a goal. If the requested resource is unavailable (no license, no access, policy-restricted), the dispatcher identifies the core objective of the task and proposes an approved analog. Refusal is the last step, not the first.
 
-В системе три агента-разработчика. Первый специализируется на модулях учёта, второй — на интеграциях, третий — универсал, но занят двумя задачами. Поступает задача на разработку интеграции. Диспетчер выбирает второго агента как оптимального по специализации.
-
-## Experimental Verification
-
-Создать виртуальный пул из 3 агентов с разными матрицами компетенций. Сформировать очередь из 5 задач разных типов. Проверить: каждая задача назначена агенту, оптимальному именно для неё.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-#### **Расширение. Диспетчер аналогов (Dispatcher-by-Goal)**
-
-Диспетчер не отказывает — он ищет аналог. Базовая логика диспетчера — маршрутизировать запрос к ресурсу. Расширенная логика — маршрутизировать к цели. Если запрошенный ресурс недоступен (нет лицензии, нет доступа, не одобрено политикой), диспетчер анализирует суть задачи и предлагает одобренный аналог. Отказ — последний шаг, а не первый.
-
-## Алгоритм
-
-(1) получить запрос → (2) проверить наличие ресурса → (3) если недоступен — определить суть задачи → (4) найти аналог в одобренном списке → (5) предложить аналог → (6) только если аналог не найден — эскалировать или отказать с объяснением.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Algorithm:** (1) receive the request → (2) check resource availability → (3) if unavailable — identify the core objective of the task → (4) find an analog in the approved list → (5) propose the analog → (6) only if no analog is found — escalate or refuse with an explanation.

@@ -1,46 +1,26 @@
 ---
 id: PATTERN-035
-title: "Dev Prod Environment Parity"
+title: "Dev-Prod Environment Parity"
 title_ru: "Паттерн 35. «Паритет сред разработки и продакшн» (Dev-Prod Environment Parity)"
 type: pattern
 subtype: engineering
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
-# Dev Prod Environment Parity
+# Dev-Prod Environment Parity
 
 > **Паттерн 35. «Паритет сред разработки и продакшн» (Dev-Prod Environment Parity)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** An agent developed and tested in one environment begins to behave differently when moved to production: different tool versions, different file paths, different database connection parameters. The classic "it worked on my machine" situation. In agent systems, this is especially dangerous: the agent can fail silently — producing different results without raising any explicit errors. Moreover, transitioning from the development environment to production requires significant reconfiguration effort, slowing down iterations.
 
-[Читать на русском](README.ru.md)
+**Solution:** The development environment and the production environment are architecturally identical. This is achieved through: containerization (Docker) with pinned versions of all dependencies; a unified software stack across all machines (identical versions of Ollama, LightRAG, PostgreSQL); configuration via environment variables (a single .env file changes the environment without code changes); a single model registry — the same models with the same quantization on dev and prod. The transition from development to production should require no more than a single configuration change (host address, database URL), not changes to architecture or code. The verification rule: if moving an agent to a new environment requires more than one configuration change — the architecture violates the parity principle.
 
-## Problem
+**Example:** An admin agent is developed and tested on a MacBook (Ollama locally, PostgreSQL in Docker, N8N in Docker). When moving to a Mac Mini, only one parameter changes in docker-compose: OLLAMA_HOST=192.168.0.xxx (the MacBook address on the network). All other components — the same images, the same versions, the same configurations. The agent starts working on the new machine without any additional setup. Its behavior is mathematically identical to that observed in the development environment.
 
-Агент, разработанный и протестированный в одной среде, при переносе в продакшн начинает вести себя иначе: другие версии инструментов, другие пути к файлам, другие параметры подключения к базам данных. Классическая ситуация «у меня работало». В агентных системах это особенно опасно: агент может работать некорректно молча, без явных ошибок — просто давая другие результаты. Кроме того, переход из среды разработки в продакшн требует значительных усилий по переконфигурации, что замедляет итерации.
+**Experimental Verification:** Required. Develop and debug an agent on one machine. Transfer it to a second machine with different characteristics (different CPU, different RAM). Record: the number of configuration changes required for launch; the divergence in agent behavior between the two environments (should be zero). Acceptable result: one changed parameter (host address), zero divergence in behavior.
 
-## Solution
-
-Среда разработки и продакшн-среда архитектурно идентичны. Это достигается через: контейнеризацию (Docker) с фиксированными версиями всех зависимостей; единый программный стек на всех машинах (одинаковые версии Ollama, LightRAG, PostgreSQL); конфигурирование через переменные окружения (один файл .env меняет среду без изменения кода); единый реестр моделей — те же модели с теми же квантизациями на dev и prod. Переход из разработки в продакшн должен сводиться к изменению одного конфигурационного параметра (адрес хоста, URL базы данных), но не к изменению архитектуры или кода. Правило проверки: если перенос агента в новую среду требует более одного изменения конфигурации — архитектура нарушает принцип паритета.
-
-## Example
-
-Агент-администратор разрабатывается и тестируется на MacBook (Ollama локально, PostgreSQL в Docker, N8N в Docker). При переносе на Mac Mini меняется только один параметр в docker-compose: OLLAMA_HOST=192.168.0.xxx (адрес MacBook в сети). Все остальные компоненты — те же образы, те же версии, те же конфигурации. Агент начинает работать на новой машине без какой-либо дополнительной настройки. Поведение математически идентично поведению в среде разработки.
-
-## Experimental Verification
-
-Разработать и отладить агента на одной машине. Перенести на вторую машину с другими характеристиками (другой CPU, другой объём RAM). Зафиксировать: количество конфигурационных изменений, потребовавшихся для запуска; расхождение в результатах работы агента между двумя средами (должно быть нулевым). Допустимый результат: один изменённый параметр (адрес хоста), нулевое расхождение в поведении.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

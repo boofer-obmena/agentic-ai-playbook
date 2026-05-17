@@ -1,52 +1,31 @@
 ---
 id: PATTERN-009
-title: "Immutable State Append Only Artifacts"
+title: "Immutable State & Append-Only Artifacts"
 title_ru: "Паттерн 9. «Неизменяемые состояния и версионирование артефактов» (Immutable State & Append-Only Artifacts)"
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "author's development"
 date_added: 2026-05-07
-version: 1.0-preview
-related: []
+version: 1.0
 ---
 
-# Immutable State Append Only Artifacts
+# Immutable State & Append-Only Artifacts
 
 > **Паттерн 9. «Неизменяемые состояния и версионирование артефактов» (Immutable State & Append-Only Artifacts)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** Shared Mutable State is the most dangerous anti-pattern in multi-agent systems. When several agents have access to the same mutable object, state races arise: agent B overwrites agent A's result. Data loss occurs silently, without any errors or warnings.
 
-[Читать на русском](README.ru.md)
+**Solution:** All critical data and artifacts are made immutable. Any change is not an overwrite of an existing record but the creation of a new version with a new identifier. Data is append-only. At each agent invocation, the Orchestrator explicitly passes it a specific, pinned version of the data. If two agents concurrently produce competing versions of the same artifact, the Orchestrator initiates a conflict resolution transaction with human involvement.
 
-## Problem
+**Example:** Two developer agents work on the same module in parallel and both create version 2.2. In a system with mutable state, one of the results is silently overwritten. In the target architecture, the Orchestrator detects the conflict and initiates a "Version Conflict Resolution" task with both versions up for review.
 
-«Разделяемое изменяемое состояние» (Shared Mutable State) — наиболее опасный антипаттерн в мультиагентных системах. Когда несколько агентов имеют доступ к одному и тому же изменяемому объекту, возникают гонки состояния: агент B перезаписывает результат агента A. Потеря данных происходит молча, без каких-либо ошибок или предупреждений.
+**Experimental Verification:** Deliberately launch two agents to work on the same module simultaneously. Record the result: both versions are preserved independently, none is lost, and a conflict resolution task is created.
 
-## Solution
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.
 
-Все критические данные и артефакты делаются неизменяемыми. Любое изменение — это не перезапись существующей записи, а создание новой версии с новым идентификатором. Данные доступны только для добавления (Append-Only). Оркестратор при каждом вызове агента явно передаёт ему конкретную, зафиксированную версию данных. Если два агента одновременно порождают конкурирующие версии одного артефакта, Оркестратор инициирует транзакцию разрешения конфликта с участием человека.
+### Warning: Agent Memory as a Critical Asset
 
-## Example
+An agent that works on a team over a long period and accumulates collective context (decisions, communication nuances, past failures and successes) gradually becomes the primary carrier of corporate or project memory. Losing this memory is equivalent to the sudden departure of the team's most experienced member.
 
-Два агента-разработчика работают над одним модулем параллельно и оба создают версию 2.2. В системе с изменяемым состоянием один из результатов молча затирается. В целевой архитектуре Оркестратор обнаруживает конфликт и инициирует задачу «Разрешение конфликта версий» с обеими версиями на ревью.
-
-## Experimental Verification
-
-Намеренно запустить двух агентов для одновременной работы над одним модулем. Зафиксировать результат: обе версии сохранены независимо, ни одна не потеряна, создана задача разрешения конфликта.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-#### **Предупреждение. Память агента как критический актив**
-
-Агент, длительно работающий в команде и накапливающий коллективный контекст (решения, нюансы коммуникации, прошлые ошибки и победы), со временем становится главным носителем корпоративной или проектной памяти. Потеря этой памяти равносильна одномоментному уходу самого опытного участника команды.
-
-Требование к архитектору: память агента является критическим активом и требует резервирования (backup по расписанию), версионирования (возможность откатить до предыдущего состояния) и документирования (понимание, что именно хранится и в каком формате).
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+Requirement for the architect: agent memory is a critical asset and requires scheduled backups, versioning (the ability to roll back to a previous state), and documentation (understanding what exactly is stored and in what format).

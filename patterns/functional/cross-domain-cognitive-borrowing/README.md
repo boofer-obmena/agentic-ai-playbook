@@ -1,98 +1,83 @@
 ---
 id: PATTERN-049
-title: "Cross Domain Cognitive Borrowing"
-title_ru: "Паттерн 49. «Кросс-доменное заимствование мышления» (Cross-Domain Cognitive Borrowing)"
+title: "Cross-Domain Cognitive Borrowing"
+title_ru: "Кросс-доменное заимствование мышления"
 type: pattern
 subtype: functional
 status: raw
-source: Master All 20 Agentic AI Design Patterns (SOURCE-006); авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
+date_updated: 2026-05-11
 version: 2.0
-related: []
+related: ["PATTERN-021", "PATTERN-017", "PATTERN-043", "PATTERN-044", "PATTERN-045", "PATTERN-011", "METHOD-015"]
 ---
 
-# Cross Domain Cognitive Borrowing
+# Cross-Domain Cognitive Borrowing
 
-> **Паттерн 49. «Кросс-доменное заимствование мышления» (Cross-Domain Cognitive Borrowing)**
+> **Кросс-доменное заимствование мышления**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** An agent confined within the boundaries of its own knowledge domain and its own cognitive model can hit an impasse: the problem resists full formulation, a solution refuses to emerge, and the known patterns of its own domain offer no way forward. Yet the problem is not sufficiently articulated to bring it to Debate (PATTERN-021) — there is no clear question that different roles could meaningfully answer. The agent gets stuck in a state of unformedness.
 
-[Читать на русском](README.ru.md)
-
-## Problem
-
-Агент, замкнутый в границах своего домена знаний и своей модели мышления, может столкнуться с тупиком: проблема не формулируется до конца, решение не вырисовывается, известные паттерны своего домена не дают хода. При этом проблема недостаточно оформлена, чтобы выносить её на дебаты (PATTERN-021) — нет чёткого вопроса, на который разные роли могли бы дать осмысленный ответ. Агент застревает в неоформленности.
-
-## Solution
-
-Агенту предоставляется архитектурная возможность временно выйти за границы своего домена в соседние домены знаний — не за готовым ответом, а за чужим способом мышления. Каждая роль (юрист, финансист, инженер) оперирует не только своим набором фактов, но и своим когнитивным алгоритмом: способом членения проблемы, категориями анализа, типовыми паттернами рассуждения. Агент заимствует эти алгоритмы, чтобы посмотреть на свою неоформленную проблему через чужую призму — и через этот lateral transfer найти формулировку или инсайт, недоступный изнутри своего домена.
+**Solution:** The agent is given the architectural capability to temporarily step outside its domain into adjacent knowledge domains — not for ready-made answers, but for someone else's way of thinking. Every role (lawyer, financier, engineer) operates not only with its own set of facts but with its own cognitive algorithm: a way of decomposing problems, categories of analysis, typical reasoning patterns. The agent borrows these algorithms to view its unformed problem through an alien lens — and through this lateral transfer, finds a formulation or an insight that was inaccessible from within its own domain.
 
 ---
 
-## Три механизма инициации (по убыванию реалистичности)
+**Three initiation mechanisms (in order of decreasing realism):**
 
-**Уровень 1 — Человек (HITL).** Человек-оператор, получив результат агента через PATTERN-044 (HITL) и посчитав его недостаточно глубоким, явно направляет агента в один или несколько смежных доменов за дополнительным инсайтом. Это наиболее надёжный механизм: человек обладает мета-когнитивной способностью оценить, что агенту не хватает глубины, и определить, какой смежный домен может дать продуктивный lateral transfer.
+**Level 1 — Human (HITL).** A human operator, upon receiving the agent's result via PATTERN-044 (HITL) and finding it insufficiently deep, explicitly directs the agent into one or more adjacent domains for additional insight. This is the most reliable mechanism: the human possesses the meta-cognitive ability to assess that the agent lacks depth and to identify which adjacent domain might yield a productive lateral transfer.
 
-**Уровень 2 — Оркестратор.** Оркестратор (PATTERN-011) или старший агент-координатор, получив результат агента-исполнителя, оценивает его глубину по заданным критериям (confidence score, наличие незаполненных секций артефакта, явный сигнал «не могу сформулировать» от исполнителя). При недостаточной глубине оркестратор командует: «Иди в домен X, посмотри на проблему его категориями». В отличие от человека, оркестратор оценивает не содержание, а формальные признаки недостаточности результата.
+**Level 2 — Orchestrator.** The Orchestrator (PATTERN-011) or a senior coordinator agent, upon receiving the executing agent's result, evaluates its depth against predefined criteria (confidence score, presence of unfilled sections in the artifact, an explicit "unable to formulate" signal from the executor). If depth is insufficient, the Orchestrator commands: "Go to domain X, view the problem through its categories." Unlike the human, the Orchestrator evaluates not content but formal signs of result insufficiency.
 
-**Уровень 3 — Самоинициация агента (экспериментальный режим).** Агент самостоятельно осознаёт, что решение не находится в его домене — и инициирует заимствование. Теоретически возможно при высоких когнитивных способностях модели (режимы extended thinking, multi-step reasoning) и при явном архитектурном требовании к агенту: после исчерпания N циклов рефлексии (PATTERN-043) без прогресса — пробовать кросс-доменный поиск. Однако данный механизм не верифицирован: LLM склонна подгонять результат под ожидание, а не признавать когнитивный тупик. Мета-когнитивная способность «я не знаю» у текущего поколения моделей не подтверждена. Оставлен в паттерне как дискуссионный — требует экспериментальной проверки при повышении когнитивных способностей моделей.
-
----
-
-## Два архитектурных требования
-
-(1) Доступ к чужим базам знаний с описанием модели мышления роли: не только «что знает юрист», но и «как юрист мыслит» — его категории, его паттерны рассуждения, его критерии оценки. Это требует, чтобы семантическая память каждого агента (PATTERN-045) включала не только факты домена, но и мета-описание когнитивной модели роли.
-
-(2) Lateral transfer: агент переосмысливает чужой паттерн мышления в своих категориях, не перенося его механически, а перерабатывая под свою задачу. Это ключевой интеллектуальный шаг паттерна — не «юрист сказал, что согласование это обязательство, значит я скопирую юридическую схему», а «юрист видит согласование как цепочку обязательств; могу ли я смоделировать своё согласование как цепочку акцептов в терминах своего домена?»
+**Level 3 — Agent self-initiation (experimental mode).** The agent independently recognizes that a solution cannot be found within its domain — and initiates borrowing. Theoretically possible with high cognitive capabilities of the model (extended thinking modes, multi-step reasoning) and with an explicit architectural requirement: after exhausting N reflection cycles (PATTERN-043) without progress — attempt cross-domain search. However, this mechanism is unverified: LLMs tend to fit results to expectations rather than recognizing a cognitive dead end. The meta-cognitive ability of "I don't know" has not been confirmed for the current generation of models. Retained in the pattern as a discussion item — requires experimental verification as model cognitive capabilities improve.
 
 ---
 
-## Выходной артефакт — три компонента
+**Two architectural requirements:**
 
-- **Результат до заимствования:** что агент смог выдать, оперируя только своим доменом знаний — исходная точка, от которой он зашёл в тупик.
-- **Результат после заимствования:** переформулированная проблема или новая гипотеза, полученная через lateral transfer.
-- **Обоснование трансформации:** из какого домена взят способ мышления, какой именно инсайт получен, как он изменил результат.
+(1) Access to other roles' knowledge bases that include descriptions of their cognitive models: not only "what a lawyer knows" but also "how a lawyer thinks" — their categories, their reasoning patterns, their evaluation criteria. This requires that each agent's semantic memory (PATTERN-045) include not only domain facts but also a meta-description of the role's cognitive model.
 
-Такая структура артефакта позволяет принимающей стороне (Дебаты или человек) оценить не только конечный вывод, но и корректность самого lateral transfer — «а правильно ли ты применил юридическое мышление к методологической задаче?»
+(2) Lateral transfer: the agent reinterprets the borrowed thinking pattern in its own categories — not mechanically transplanting it but reworking it to fit its own task. This is the key intellectual step of the pattern: not "the lawyer said approval is a commitment, therefore I will copy the legal schema," but "the lawyer sees approval as a chain of commitments; can I model my approval as a chain of acceptances in the terms of my own domain?"
 
 ---
 
-**Отличие от PATTERN-021 (Дебаты).** Дебаты отвечают на сформулированный вопрос множественным контрастом ролей. Cross-Domain Borrowing происходит на предшествующем этапе — когда вопрос ещё не сформулирован, когда агент ищет не ответ, а саму возможность задать вопрос. Дебаты — это «что вы думаете о X?». Заимствование — это «я не знаю, как назвать X; дай мне посмотреть на мир твоими категориями, и, возможно, я увижу X».
+**Output artifact — three components:**
 
-**Отличие от PATTERN-017 (Динамическая онтология).** PATTERN-017 описывает механизм обнаружения новых связей внутри своего домена через периферию предположений. Cross-Domain Borrowing — выход наружу, в чужой домен, за чужим способом мышления.
+- **Pre-borrowing result:** what the agent was able to produce operating solely within its own knowledge domain — the starting point from which it hit the impasse.
+- **Post-borrowing result:** the reformulated problem or new hypothesis obtained through lateral transfer.
+- **Transformation justification:** which domain the thinking pattern was borrowed from, what specific insight was gained, and how it changed the result.
 
-**Отличие от METHOD-015 (Управляемое исследование неизвестного незнания).** METHOD-015 остаётся внутри своего домена и систематически ищет слепые зоны — картирует границы познанного. PATTERN-049 временно выходит в чужой домен за альтернативным способом мышления. Они комплементарны: METHOD-015 на шаге Gap Probing может использовать PATTERN-049 как инструмент зондирования обнаруженного пробела; PATTERN-049 может использовать METHOD-015 для предварительного картирования — чтобы понять, в какой именно смежный домен имеет смысл идти.
-
----
-
-## Example
-
-Методолог проектирует архитектуру информационной системы и застревает: не может сформулировать, как должен работать механизм согласования документов. В своей методологической базе — паттерны процессов, переходов состояний, ролевых моделей — прямого решения нет. Он исчерпал когнитивную рефлексию (PATTERN-043) внутри своего домена — результат остаётся поверхностным. Человек-архитектор через PATTERN-044 направляет агента: «Посмотри, как юрист мыслит о согласовании — не какие нормы он применяет, а какими категориями он оперирует».
-
-Агент идёт в семантическую память юридической роли (PATTERN-045) и обнаруживает: юрист мыслит о согласовании не как о процессе, а как о цепочке обязательств — каждый визирующий принимает на себя ответственность. Это не workflow, а последовательность акцептов.
-
-Lateral transfer: методолог переосмысливает юридический способ мышления в своих категориях. Инсайт: «Согласование можно моделировать не как workflow с переходами состояний, а как цепочку акцептованных обязательств, где каждый акцепт — это не просто факт подписания, а юридически значимое действие с измеримыми последствиями».
-
-Выходной артефакт: (1) исходная формулировка — «workflow-модель не ложится на согласование»; (2) новая гипотеза — «модель цепочки акцептованных обязательств»; (3) обоснование — юридический способ мышления о согласовании, переосмысленный в методологических терминах.
-
-С этим артефактом методолог выходит на Дебаты (PATTERN-021): другие роли могут оспорить как саму гипотезу, так и корректность lateral transfer — «ты уверен, что юридическая модель обязательств применима к методологическому проектированию?»
+This artifact structure allows the receiving party (Debate or human) to evaluate not only the final conclusion but also the correctness of the lateral transfer itself — "did you correctly apply legal thinking to a methodological problem?"
 
 ---
 
-## Связь с другими сущностями
+**Distinction from PATTERN-021 (Agent Debate).** Debate answers a formulated question through multiple-role contrast. Cross-Domain Borrowing occurs at the prior stage — when the question has not yet been formulated, when the agent is searching not for an answer but for the very possibility of asking a question. Debate is "what do you think about X?" Borrowing is "I don't know what to call X; let me look at the world through your categories, and perhaps I will see X."
 
-Предшествует PATTERN-021 (Дебаты) — помогает сформулировать проблему, которая затем выносится на контраст ролей. Дополняет PATTERN-017 (Динамическая онтология) — PATTERN-017 исследует свой домен, PATTERN-049 выходит в чужие. Может инициироваться из PATTERN-043 (Reflection) — когда когнитивная рефлексия внутри своего домена исчерпана. Может инициироваться человеком через PATTERN-044 (HITL). Может инициироваться оркестратором через PATTERN-011. Использует PATTERN-045 (Единая модель памяти) — требует доступа к семантической памяти других агентов, включая описание их когнитивных моделей. Дополняет METHOD-015 (Управляемое исследование неизвестного незнания) — METHOD-015 находит пробел, PATTERN-049 может быть использован для его зондирования.
+**Distinction from PATTERN-017 (Dynamic Ontology).** PATTERN-017 describes the mechanism of discovering new connections within one's own domain through the periphery of assumptions. Cross-Domain Borrowing is an exit outward — into another domain, for another way of thinking.
 
-## Experimental Verification
+**Distinction from METHOD-015 (Guided Exploration of Unknown Unknowns).** METHOD-015 remains within its own domain and systematically searches for blind spots — charting the edges of its own knowledge. PATTERN-049 temporarily exits into another domain for an alternative mode of thinking. They are complementary: METHOD-015, at the Gap Probing step, can use PATTERN-049 as a tool for probing a discovered gap; PATTERN-049 can use METHOD-015 for preliminary mapping — to understand which adjacent domain it makes sense to enter.
 
-Требуется. План: дать агенту-методологу задачу, для которой в его домене нет прямого решения. Сравнить три режима: (а) только со своей базой знаний, (б) с доступом к базам знаний смежных ролей и описаниям их моделей мышления (инициация оркестратором), (в) с инструкцией на самоинициацию после исчерпания N циклов рефлексии. Измерить: время до формулирования проблемы, качество итогового решения, долю ложных самоинициаций в режиме (в).
+---
 
-## Application History
+**Example:** A methodologist is designing an information system architecture and gets stuck: they cannot formulate how the document approval mechanism should work. In their methodological base — process patterns, state transitions, role models — there is no direct solution. They have exhausted cognitive reflection (PATTERN-043) within their domain — the result remains superficial. The human architect, via PATTERN-044, directs the agent: "Look at how a lawyer thinks about approval — not what norms they apply, but what categories they operate with."
 
-Не применялся. Статус: raw.
+The agent accesses the semantic memory of the legal role (PATTERN-045) and discovers: a lawyer thinks about approval not as a process but as a chain of commitments — each approver assumes responsibility. This is not a workflow but a sequence of acceptances.
 
-## Related Entities
+Lateral transfer: the methodologist reinterprets the legal way of thinking in their own categories. Insight: "Approval can be modeled not as a workflow with state transitions but as a chain of accepted commitments, where each acceptance is not merely the fact of signing but a legally meaningful action with measurable consequences."
 
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+Output artifact: (1) original formulation — "the workflow model does not fit approval"; (2) new hypothesis — "the chain-of-accepted-commitments model"; (3) justification — the legal way of thinking about approval, reinterpreted in methodological terms.
+
+With this artifact, the methodologist enters Debate (PATTERN-021): other roles can challenge both the hypothesis itself and the correctness of the lateral transfer — "are you sure the legal model of commitments is applicable to methodological design?"
+
+**Related Entities:**
+
+- Precedes [PATTERN-021](../PATTERN-021-agent-debate/) — helps formulate a problem that is then brought to role contrast
+- Complements [PATTERN-017](../PATTERN-017-dynamic-ontology/) — PATTERN-017 explores its own domain; PATTERN-049 exits into others
+- Can be initiated from [PATTERN-043](../PATTERN-043-single-role-reflective-deepening/) — when cognitive reflection within the domain is exhausted
+- Can be initiated by a human via [PATTERN-044](../PATTERN-044-evolving-human-agent-trust/)
+- Can be initiated by the Orchestrator via [PATTERN-011](../PATTERN-011-orchestrator/)
+- Uses [PATTERN-045](../PATTERN-045-four-level-agent-memory/) — requires access to the semantic memory of other agents, including descriptions of their cognitive models
+- Complements [METHOD-015](../METHOD-015-guided-exploration/) — METHOD-015 finds the gap; PATTERN-049 can be used to probe it
+
+**Experimental Verification:** Required. Plan: give a methodologist agent a task for which no direct solution exists in its domain. Compare three modes: (a) with its own knowledge base only, (b) with access to adjacent-role knowledge bases and their cognitive model descriptions (Orchestrator-initiated), (c) with instructions for self-initiation after exhausting N reflection cycles. Measure: time to problem formulation, quality of the final solution, proportion of false self-initiations in mode (c).
+
+**Application History:** Not applied. Status: raw.

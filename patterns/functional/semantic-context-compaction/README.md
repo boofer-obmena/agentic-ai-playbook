@@ -5,9 +5,9 @@ title_ru: "Паттерн 27. «Семантически умное сжатие
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
@@ -15,28 +15,10 @@ related: []
 
 > **Паттерн 27. «Семантически умное сжатие контекста» (Semantic Context Compaction)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** A long-running agent that accumulates tool logs, intermediate results, and multi-page files inevitably reaches the context window limit. The naive solution — deleting the oldest messages — is critically dangerous: the original task or a key constraint set by the user at the very beginning could be lost.
 
-[Читать на русском](README.ru.md)
+**Solution:** The context is divided into three zones with different processing rules triggered when the fill threshold (~80–90% of the token limit) is reached. Zone 1 — Foundation (start of context): the system prompt and the user's original task. Never compacted; rigidly anchored. Zone 2 — Active Work (end of context): the last N steps of the agent, where the current sub-task is being solved. Preserved in raw form. Zone 3 — Archive (middle portion): intermediate reasoning, logs of failed attempts, contents of already-analyzed and closed files. Compacted into short text summaries.
 
-## Problem
+**Experimental Verification:** Required. Launch an agent on a task designed to fill the context window (processing 50+ files). Verify: the original task and the last N steps are preserved verbatim; after compaction the agent continues working without losing direction; the final result is correct.
 
-Долгоживущий агент, накапливающий логи инструментов, промежуточные результаты и многостраничные файлы, неизбежно достигает предела контекстного окна. Наивное решение — удалять самые старые сообщения — критически опасно: можно потерять исходную задачу или ключевое ограничение, заданное пользователем в самом начале.
-
-## Solution
-
-Контекст делится на три зоны с разными правилами обработки при достижении порога заполнения (~80–90% лимита токенов). Зона 1 — Фундамент (начало контекста): системный промпт и исходная задача пользователя. Никогда не сжимаются, жёстко закреплены. Зона 2 — Активная работа (конец контекста): последние N шагов агента, где происходит решение текущей подзадачи. Остаются в сыром виде. Зона 3 — Архив (средняя часть): промежуточные размышления, логи неудачных попыток, содержимое уже проанализированных и закрытых файлов. Сжимаются в короткие текстовые резюме.
-
-## Experimental Verification
-
-Запустить агента на задаче, рассчитанной на заполнение контекста (обработка 50+ файлов). Проверить: исходная задача и последние N шагов сохранены дословно; агент после сжатия продолжает работу без потери направления; итоговый результат корректен.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.

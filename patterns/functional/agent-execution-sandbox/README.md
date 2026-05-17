@@ -5,9 +5,9 @@ title_ru: "Паттерн 26. «Изолированная песочница а
 type: pattern
 subtype: functional
 status: raw
-source: авторская разработка
+source: "Master All 20 Agentic AI Design Patterns (SOURCE-006); author's development"
 date_added: 2026-05-07
-version: 1.0-preview
+version: 1.0
 related: []
 ---
 
@@ -15,32 +15,12 @@ related: []
 
 > **Паттерн 26. «Изолированная песочница агента» (Agent Execution Sandbox)**
 
-> *[English translation pending — original Russian text preserved in sections below.]*
+**Problem:** An autonomous agent with access to real infrastructure poses a systemic risk: an error by one agent can damage another agent's environment, an accidental destructive command can affect production data, and agents running in parallel can conflict over shared resources.
 
-[Читать на русском](README.ru.md)
+**Solution:** Each remote agent is launched in a fully isolated container with its own file system, network stack, and dependency set. Inside the container, the agent is given absolute freedom of action. The core infrastructure is physically unreachable. Agents have no shared mutable state. Isolation is not a restriction on the agent — it is an expansion of its freedom with zero risk to production.
 
-## Problem
+**Precondition:** This pattern is justified for remote agents working asynchronously on independent tasks. For local assistant agents working in real-time dialogue with a user, restricting permissions via a command allowlist is sufficient (see BACKLOG-012).
 
-Автономный агент с доступом к реальной инфраструктуре представляет системный риск: ошибка одного агента может повредить среду другого, случайная деструктивная команда может затронуть продакшн-данные, параллельно работающие агенты могут конфликтовать за общие ресурсы.
+**Experimental Verification:** Required. Launch an agent in an isolated container with a task that deliberately includes a destructive step. Verify: the destructive action is executed inside the container, the core file system is untouched. Launch two agents in parallel with conflicting dependencies — both operate independently.
 
-## Solution
-
-Каждый удалённый агент запускается в полностью изолированном контейнере с собственной файловой системой, сетевым стеком и набором зависимостей. Внутри контейнера агент получает абсолютную свободу действий. Основная инфраструктура физически недостижима. Агенты не имеют общих изменяемых ресурсов. Изоляция — не ограничение агента, а расширение его свободы при нулевом риске для продакшна.
-
-## Предусловие применения
-
-Паттерн оправдан для удалённых агентов, работающих асинхронно над независимыми задачами. Для локальных агентов-ассистентов, работающих в диалоге с пользователем в реальном времени, достаточно ограничения прав через белый список команд (Паттерн И3).
-
-## Experimental Verification
-
-Запустить агента в изолированном контейнере с задачей, намеренно содержащей деструктивный шаг. Проверить: деструктивное действие выполнено внутри контейнера, основная файловая система нетронута. Запустить двух агентов параллельно с конфликтующими зависимостями — оба работают независимо.
-
-## Application History
-
-Не применялся. Раздел заполняется по результатам реального использования паттерна: контекст задачи, что сработало, что потребовало корректировки, итоговые выводы.
-
-## Related Entities
-
-**Implementations:** [implementations/](implementations/)
-**Case Studies:** [case-studies/](case-studies/)
-**Experiments:** [experiments/](experiments/)
+**Application History:** Not applied. This section is populated based on real-world use of the pattern: task context, what worked, what required adjustment, and final conclusions.
